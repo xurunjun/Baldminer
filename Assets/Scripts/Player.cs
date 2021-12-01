@@ -51,9 +51,10 @@ public class Player : Singleton<Player>
         if(!isBack&&!isFire)
         {
             getVelocity(screenPosition);
-            bullet = Instantiate(bulletList[GameManager.Instance.getRedom(0,bulletList.Count)]);
+            bullet = ObjectPool.Instance.GetObject(bulletList[GameManager.Instance.getRedom(0,bulletList.Count)]);
             bullet.transform.position = startPosition;
             bullet.GetComponent<AddBullet>().startFly(speed,direction);
+
             isFire=true;
         }
     }

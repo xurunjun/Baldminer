@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GenerateManager : MonoBehaviour
+public class GenerateManager : Singleton<GenerateManager>
 {
 
     [Header("生成最大范围二分之一宽度")]
@@ -34,10 +34,13 @@ public class GenerateManager : MonoBehaviour
 
     [Header("最大生成上限")]
     public int maxItem;
-
+    [Header("分数列表")]
+    public List<int> numList;
+    [Header("生成间隔")]
+    public float time;
     private float timer=0;
-
-    private int itemNum=0;
+    [Header("当前物体数量")]
+    public int itemNum=0;
 
     private void Awake() {
     }
@@ -45,7 +48,7 @@ public class GenerateManager : MonoBehaviour
     bool nextTimer(float deltaTime)
     {
         timer+=deltaTime;
-        if(timer>3)
+        if(timer>time)
         {
             return true;
         }
@@ -77,8 +80,10 @@ public class GenerateManager : MonoBehaviour
     {
         if(reachMaxItem()&&nextTimer(Time.deltaTime))
         {
-            GameObject _Instance = Instantiate(Elements[GameManager.Instance.getRedom(0,Elements.Count)],getElementPosition(),Quaternion.identity);
+            GameObject _Instance = ObjectPool.Instance.GetObject(Elements[GameManager.Instance.getRedom(0,Elements.Count)]);
+            _Instance.transform.position=getElementPosition();
             _Instance.transform.parent = this.transform;
+            _Instance.GetComponent<Number>().setScore(numList[GameManager.Instance.getRedom(0,numList.Count)]);
             clearTimer();
             itemNum++;
         }

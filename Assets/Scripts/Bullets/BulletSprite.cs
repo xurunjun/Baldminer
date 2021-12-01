@@ -11,13 +11,27 @@ public class BulletSprite : MonoBehaviour
 
     public UnityAction<Collision2D> action;
 
+    private bool hasBack=false;
+
+    private void OnEnable() {
+        hasBack=false;
+    }
+
     private void OnBecameInvisible() {
-        Player.Instance.isFire=false;
-        Player.Instance.isBack=false;
-        Destroy(bullet);
+        if(!hasBack)
+        {
+            Player.Instance.isFire=false;
+            Player.Instance.isBack=false;
+            GameManager.Instance.nextScoreEvent();
+        }
+        ObjectPool.Instance.PushObject(bullet);
+        // Destroy(bullet);
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
+        hasBack=true;
+        Player.Instance.isFire=false;
+        Player.Instance.isBack=true;
         collisionEvent.Invoke(other);
     }
 }
