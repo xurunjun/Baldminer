@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class GenerateManager : MonoBehaviour
 {
-    [Header("随机种子")]
-    public int seed;
 
     [Header("生成最大范围二分之一宽度")]
     public int maxWidth;
@@ -21,6 +19,9 @@ public class GenerateManager : MonoBehaviour
 
     [Header("锚点纵坐标")]
     public int anchorY;
+
+    [Header("锚点Z坐标")]
+    public int anchorZ;
 
     [Header("生成元素列表")]
     public List<GameObject> Elements;
@@ -39,7 +40,6 @@ public class GenerateManager : MonoBehaviour
     private int itemNum=0;
 
     private void Awake() {
-        Random.InitState(seed);
     }
 
     bool nextTimer(float deltaTime)
@@ -66,15 +66,10 @@ public class GenerateManager : MonoBehaviour
         timer=0;
     }
 
-    int getIndex()
-    {
-        return Random.Range(0,Elements.Count);
-    }
-
     Vector3 getElementPosition()
     {
         return new Vector3(Random.Range(-maxWidth,maxWidth)+anchorX,
-        Random.Range(-maxHight,maxHight)+anchorY,-2);
+        Random.Range(-maxHight,maxHight)+anchorY,anchorZ);
     }
 
     // Update is called once per frame
@@ -82,7 +77,7 @@ public class GenerateManager : MonoBehaviour
     {
         if(reachMaxItem()&&nextTimer(Time.deltaTime))
         {
-            GameObject _Instance = Instantiate(Elements[getIndex()],getElementPosition(),Quaternion.identity);
+            GameObject _Instance = Instantiate(Elements[GameManager.Instance.getRedom(0,Elements.Count)],getElementPosition(),Quaternion.identity);
             _Instance.transform.parent = this.transform;
             clearTimer();
             itemNum++;

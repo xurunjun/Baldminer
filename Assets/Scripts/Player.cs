@@ -1,35 +1,24 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Singleton<Player>
 {
-
-    [Header("线段渲染器")]
-    public LineRenderer lineRenderer;
+    [Header("种子")]
+    public int seed;
+    private GameObject bullet;
+    [Header("子弹列表")]
+    public List<GameObject> bulletList;
     [Header("起始位置")]
     public Vector2 startPosition;
     [Header("最大高度")]
     public float maxY;
     [Header("目标位置")]
     public Vector2 targetPosition;
-    [Header("目标位置Z坐标")]
-    public float targetPositionZ;
-    [Header("基础速度因子")]
-    public float baseSpeed;
-    [Header("发射中")]
+    [Header("基础速度")]
+    public float speed;
+    private Vector2 direction;
     public bool isFire;
-    [Header("回收中")]
     public bool isBack;
-
-    public bool isFiring{
-        get{
-            return isFire;
-        }
-    }
-    public bool isBacking{
-        get{
-            return isBack;
-        }
-    }
 
     private InputManager inputManager;
 
@@ -38,8 +27,6 @@ public class Player : MonoBehaviour
     }
     void Start()
     {
-        startPosition = transform.position;
-        targetPosition = transform.position;
     }
     private void OnEnable() {
         inputManager.onEndTouch+=Fire;
@@ -49,53 +36,24 @@ public class Player : MonoBehaviour
         inputManager.onEndTouch -=Fire;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void getVelocity(Vector2 value)
     {
-        moveToPosition();
-    }
-
-    public void setTargetPosition(Vector2 value)
-    {
-        Vector2 vec=Camera.main.ScreenToWorldPoint(value);
-        if(vec.y>maxY)
+        Vector2 pos = Camera.main.ScreenToWorldPoint(value);
+        if(pos.y>maxY)
         {
-            vec.y=maxY;
+            pos.y=maxY;
         }
-        targetPosition=vec;
-    }
-
-    public void moveToPosition()
-    {
-        if(isFiring)
-        {
-            Vector2 currentPostion = lineRenderer.GetPosition(1);
-            lineRenderer.SetPosition(1,Vector2.Lerp(currentPostion,targetPosition,baseSpeed));
-            if(Vector2.Distance(targetPosition,currentPostion)<0.2f)
-            {
-                lineRenderer.SetPosition(1,targetPosition);
-                targetPosition=startPosition;
-                isFire=false;
-                isBack=true;
-            }
-        }
-        if(isBacking)
-        {
-            Vector2 currentPostion = lineRenderer.GetPosition(1);
-            lineRenderer.SetPosition(1,Vector2.Lerp(currentPostion,targetPosition,baseSpeed));
-            if(Vector2.Distance(targetPosition,currentPostion)<0.2f)
-            {
-                lineRenderer.SetPosition(1,targetPosition);
-                isBack=false;
-            }
-        }
+        direction=(pos-startPosition).normalized;
     }
 
     public void Fire(Vector2 screenPosition,float time)
     {
-        if(!isBacking&&!isFiring)
+        if(!isBack&&!isFire)
         {
-            setTargetPosition(screenPosition);
+            getVelocity(screenPosition);
+            bullet = Instantiate(bulletList[GameManager.Instance.getRedom(0,bulletList.Count)]);
+            bullet.transform.position = startPosition;
+            bullet.GetComponent<AddBullet>().startFly(speed,direction);
             isFire=true;
         }
     }

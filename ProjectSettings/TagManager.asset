@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Number
+  - bullet
+  - Border
   layers:
   - Default
   - TransparentFX
@@ -12,7 +14,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Prtacle
   - 
   - 
   - 
@@ -41,4 +43,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Prtacle
+    uniqueID: 722737195
     locked: 0
