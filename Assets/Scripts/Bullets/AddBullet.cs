@@ -11,7 +11,6 @@ public class AddBullet : Bullet
     public void OnCollisionAction(Collision2D other) {
         if(other.gameObject.tag=="Number")
         {
-            other.rigidbody.AddForce(direction*speed*fourceFactor,ForceMode2D.Impulse);
             GameObject e =  Instantiate(explose);
             e.transform.position = transform.position;
             ObjectPool.Instance.PushObject(gameObject);

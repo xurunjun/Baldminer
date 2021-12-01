@@ -26,6 +26,7 @@ public class Number : MonoBehaviour
     public new Rigidbody2D rigidbody;
     [Header("动画状态机")]
     public Animator animator;
+    private Vector3 currentPos;
     private void OnEnable() {
         isBacking=false;
         rigidbody.interpolation=RigidbodyInterpolation2D.Interpolate;
@@ -45,9 +46,10 @@ public class Number : MonoBehaviour
 
         if(isBacking)
         {
-            // rigidbody.transform.Rotate(Vector3.forward*roationSpeed);
-            transform.right=Vector3.Slerp(transform.right,direction,lerp/Vector2.Distance(transform.position,targetPos));
-            rigidbody.velocity=transform.right*speed;
+            currentPos=transform.position;
+            transform.right=Vector3.Slerp(transform.right,direction,lerp/Vector2.Distance(transform.position,targetPos)*speed);
+            transform.position = currentPos+transform.right*speed;
+            rigidbody.transform.Rotate(Vector3.forward*speed*roationSpeed);
         }
         if(Vector2.Distance(transform.position,targetPos)<2f&&isBacking)
         {
@@ -61,7 +63,7 @@ public class Number : MonoBehaviour
     {
         rigidbody.velocity=Vector2.zero;
         transform.position=targetPos;
-        StartCoroutine(waitToDestory(gameObject,.8f));
+        StartCoroutine(waitToDestory(gameObject,.3f));
     }
 
     IEnumerator waitToDestory(GameObject gameObject,float time)
@@ -78,7 +80,7 @@ public class Number : MonoBehaviour
         // Destroy(gameObject);
     }
 
-    private void OnCollisionEnter2D(Collision2D other) {
+    public void OnCollisionAction(Collision2D other) {
         if(other.gameObject.tag=="bullet")
         {
             isBacking=true;

@@ -50,9 +50,9 @@ public class GameManager : Singleton<GameManager>
 
     private void divScore(int score)
     {
-        if(this.score==0)
+        if(score==0)
         {
-            score=0;
+            score=1;
         }
         this.score/=score;
     }
