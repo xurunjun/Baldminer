@@ -11,6 +11,8 @@ public class button : MonoBehaviour
     public GameObject SoundSetting;
 
     public StopBtn stopBtn;
+    public Countdown countdown;
+
 
     public void Start()
     {
@@ -20,6 +22,8 @@ public class button : MonoBehaviour
         player.SetActive(false);
         GenerateManager.SetActive(false);
         gameObject.SetActive(true);
+
+        countdown.time = 60;
     }
     public void StartGameBtn()
     {

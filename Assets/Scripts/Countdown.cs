@@ -5,18 +5,25 @@ using UnityEngine.UI;
 
 public class Countdown : MonoBehaviour
 {
-    public Text timeLeft;
+    public GameObject EndGameCanvas;
 
+    public Text timeLeft;
     public StopBtn stopBtn;
 
     public float time = 60;
     public void TimeLeft()
     {
-        if(stopBtn.StopEnable)
-            time -= Time.deltaTime;  
+        if(stopBtn.StopWindow.active == false)
+            time -= Time.deltaTime;
 
-        if (time < 0)
+        if (time <= 0)
+        {
+            stopBtn.Generater.SetActive(false);
+            EndGameCanvas.SetActive(true);
             time = 0;
+        }
+        else
+            EndGameCanvas.SetActive(false);
     }
 
     // Update is called once per frame

@@ -15,5 +15,10 @@ public class Score : MonoBehaviour
         Scorenum.text = "0";
     }
 
+    void Update()
+    {
+        Scorenum.text = score.ToString();
+    }
+
 
 }
