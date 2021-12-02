@@ -1,0 +1,33 @@
+{
+    "name": "Test",
+    "maps": [
+        {
+            "name": "UI",
+            "id": "3c917bd7-7534-43c2-8f32-b486376955be",
+            "actions": [
+                {
+                    "name": "Click",
+                    "type": "Button",
+                    "id": "8fa07e35-9e84-4ca3-96ae-5d3c8f549623",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "068466a1-fbac-4f63-9e60-cfa74a10099a",
+                    "path": "<Touchscreen>/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
