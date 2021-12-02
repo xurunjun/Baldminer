@@ -24,6 +24,8 @@ public class Number : MonoBehaviour
     public float density;
     [Header("刚体")]
     public new Rigidbody2D rigidbody;
+    // [Header("碰撞体")]
+    // public new PolygonCollider2D collider;
     [Header("动画状态机")]
     public Animator animator;
     private Vector3 currentPos;
@@ -33,6 +35,7 @@ public class Number : MonoBehaviour
         rigidbody.isKinematic=false;
         rigidbody.velocity=Vector2.zero;
         rigidbody.angularVelocity=0;
+        rigidbody.transform.rotation=Quaternion.identity;
     }
 
     public void setScore(int factor)
@@ -41,7 +44,7 @@ public class Number : MonoBehaviour
         transform.localScale=new Vector3(baseScale/factor,baseScale/factor,1);
     }
 
-    private void FixedUpdate() {
+    private void Update() {
         direction=(targetPos-(Vector2)transform.position).normalized;
 
         if(isBacking)
@@ -51,7 +54,7 @@ public class Number : MonoBehaviour
             transform.position = currentPos+transform.right*speed;
             rigidbody.transform.Rotate(Vector3.forward*speed*roationSpeed);
         }
-        if(Vector2.Distance(transform.position,targetPos)<2f&&isBacking)
+        if(Vector2.Distance(transform.position,targetPos)<2.5f)
         {
             isBacking=false;
             animator.SetBool("isbacking",false);
@@ -83,6 +86,7 @@ public class Number : MonoBehaviour
     public void OnCollisionAction(Collision2D other) {
         if(other.gameObject.tag=="bullet")
         {
+            speed = Player.Instance.currentSpeed;
             isBacking=true;
             animator.SetBool("isbacking",true);
             rigidbody.interpolation=RigidbodyInterpolation2D.None;

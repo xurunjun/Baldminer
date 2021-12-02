@@ -13,6 +13,14 @@ public class GameManager : Singleton<GameManager>
     public int score;
     [Header("符号")]
     public string symbol;
+    [Header("加法分数")]
+    public int _addScore;
+    [Header("减法分数")]
+    public int _subScore;
+    [Header("乘法分数")]
+    public int _mulScore;
+    [Header("除法分数")]
+    public int _divScore;
     private int next;
 
     private UnityAction<int> action;
@@ -35,26 +43,30 @@ public class GameManager : Singleton<GameManager>
 
     private void addScroe(int score)
     {
-        this.score += score;
+        this.score += (int)(score*Player.Instance._Mage);
+        _addScore+=score;
     }
 
     private void subScore(int score)
     {
-        this.score -= score;
+        this.score -= (int)(score*Player.Instance._Mage);
+        _subScore+=score;
     }
 
     private void mulScore(int score)
     {
-        this.score*=score;
+        this.score*=(int)(score*Player.Instance._Mage);
+        _mulScore+=score;
     }
 
     private void divScore(int score)
     {
+        _divScore+=score;
         if(score==0)
         {
             score=1;
         }
-        this.score/=score;
+        this.score/=(int)(score*Player.Instance._Mage);
     }
 
     public void nextScoreEvent()
@@ -67,6 +79,31 @@ public class GameManager : Singleton<GameManager>
     {
         scoreEvent[next].Invoke(score);
         nextScoreEvent();
+        updatePlayer();
+    }
+
+    public void updatePlayer()
+    {
+        if(_addScore>Player.Instance.getCost(Player.LevelType.SPEED))
+        {
+            _addScore=0;
+            Player.Instance.LevelUp(Player.LevelType.SPEED);
+        }
+        if(_subScore>Player.Instance.getCost(Player.LevelType.SIZE))
+        {
+            _subScore=0;
+            Player.Instance.LevelUp(Player.LevelType.SIZE);
+        }
+        if(_mulScore>Player.Instance.getCost(Player.LevelType.MAGN))
+        {
+            _mulScore=0;
+            Player.Instance.LevelUp(Player.LevelType.MAGN);
+        }
+        if(_divScore>Player.Instance.getCost(Player.LevelType.COST))
+        {
+            _divScore=0;
+            Player.Instance.LevelUp(Player.LevelType.COST);
+        }
     }
 
     public void setSymbol()

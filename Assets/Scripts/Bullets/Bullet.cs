@@ -24,10 +24,11 @@ abstract public class Bullet : MonoBehaviour
         isFlying=false;
     }
 
-    public virtual void startFly(float velocity,Vector2 direction)
+    public virtual void startFly(float velocity,Vector2 direction,float size)
     {
         this.speed=velocity;
         this.direction=direction;
+        this.transform.localScale=Vector3.one*size;
         isFlying=true;
     }
 

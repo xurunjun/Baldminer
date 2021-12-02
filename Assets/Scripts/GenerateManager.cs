@@ -84,6 +84,7 @@ public class GenerateManager : Singleton<GenerateManager>
             _Instance.transform.position=getElementPosition();
             _Instance.transform.parent = this.transform;
             _Instance.GetComponent<Number>().setScore(numList[GameManager.Instance.getRedom(0,numList.Count)]);
+            PolygonCollider2D collider = _Instance.GetComponent<PolygonCollider2D>();
             clearTimer();
             itemNum++;
         }

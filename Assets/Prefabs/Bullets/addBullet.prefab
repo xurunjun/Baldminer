@@ -4853,7 +4853,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   direction: {x: 0, y: 0}
-  rotateSpeedFactor: 8
+  rotateSpeedFactor: 16
   fourceFactor: 100
   isFlying: 0
   currentPos: {x: 0, y: 0}

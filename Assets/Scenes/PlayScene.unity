@@ -527,7 +527,57 @@ MonoBehaviour:
   startPosition: {x: 0, y: 50}
   maxY: 50
   targetPosition: {x: 0, y: 50}
-  speed: 1.5
+  costList: 050000000a000000140000002800000050000000a0000000400100008002000000050000000a000000140000
+  speedLevel:
+  - 1
+  - 1.2
+  - 1.4
+  - 1.6
+  - 1.8
+  - 2
+  - 2.2
+  - 2.4
+  - 2.6
+  - 2.8
+  - 3
+  sizeLevel:
+  - 1
+  - 1.2
+  - 1.4
+  - 1.6
+  - 1.8
+  - 2
+  - 2.2
+  - 2.4
+  - 2.6
+  - 2.8
+  - 3
+  MagnLevel:
+  - 1
+  - 1.5
+  - 2
+  - 2.5
+  - 3
+  - 3.5
+  - 4
+  - 4.5
+  - 5
+  - 5
+  - 5
+  costLevel:
+  - 1
+  - 0.5
+  - 0.25
+  - 0.125
+  - 0.0625
+  - 0.03125
+  - 0.015625
+  - 0.0078125
+  - 0.00390625
+  currentSpeed: 1
+  currentSize: 1
+  currentMagn: 1
+  currentCost: 1
   isFire: 0
   isBack: 0
 --- !u!1 &891391325
@@ -649,6 +699,10 @@ MonoBehaviour:
   seed: 0
   score: 0
   symbol: 
+  _addScore: 0
+  _subScore: 0
+  _mulScore: 0
+  _divScore: 0
 --- !u!4 &1006504054
 Transform:
   m_ObjectHideFlags: 0
