@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Scripts/Bullets/Bullet.cs.meta
+guid: f255178ad4a06e24f8494cd8a72d83f9
+=======
+guid: 4b35628e2e67de742a761c9352b1720f
+>>>>>>> Pushfct:Assets/Scripts/BulletIcon.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

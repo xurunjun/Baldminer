@@ -59,6 +59,7 @@ public class Player : Singleton<Player>
     }
     private void OnEnable() {
         inputManager.onEndTouch+=Fire;
+        isFire=isBack=false;
     }
 
     private void OnDisable() {
