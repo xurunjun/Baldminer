@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class AddBullet : Bullet
@@ -11,10 +12,10 @@ public class AddBullet : Bullet
     public void OnCollisionAction(Collision2D other) {
         if(other.gameObject.tag=="Number")
         {
-            other.rigidbody.AddForce(direction*speed*fourceFactor,ForceMode2D.Impulse);
-            Player.Instance.isFire=false;
-            Player.Instance.isBack=false;
-            Destroy(gameObject);
+            GameObject e =  Instantiate(explose);
+            e.transform.position = transform.position;
+            ObjectPool.Instance.PushObject(gameObject);
+            // Destroy(gameObject);
         }
     }
 }

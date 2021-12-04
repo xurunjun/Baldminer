@@ -27,7 +27,6 @@ public class button : MonoBehaviour
     }
     public void StartGameBtn()
     {
-        Debug.Log("yesman");
         player.SetActive(true);
         GenerateManager.SetActive(true);
         gameObject.SetActive(false);

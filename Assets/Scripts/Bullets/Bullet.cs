@@ -17,12 +17,18 @@ abstract public class Bullet : MonoBehaviour
     public Vector2 currentPos;
     [Header("刚体")]
     public new Rigidbody2D rigidbody;
+    [Header("爆炸效果")]
+    public GameObject explose;
 
+    private void OnEnable() {
+        isFlying=false;
+    }
 
-    public void startFly(float velocity,Vector2 direction)
+    public virtual void startFly(float velocity,Vector2 direction,float size)
     {
         this.speed=velocity;
         this.direction=direction;
+        this.transform.localScale=Vector3.one*size;
         isFlying=true;
     }
 
