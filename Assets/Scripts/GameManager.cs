@@ -21,8 +21,16 @@ public class GameManager : Singleton<GameManager>
     public int _mulScore;
     [Header("除法分数")]
     public int _divScore;
+    [Header("分数显示器")]
+    public Score scoreShower;
+    [Header("子弹显示器")]
+    public BulletIcon bullet;
     private int next;
-
+    public int _NEXT{
+        get{
+            return next;
+        }
+    }
     private UnityAction<int> action;
 
     private List<ScoreEvent> scoreEvent;
@@ -78,7 +86,9 @@ public class GameManager : Singleton<GameManager>
     public void changeScore(int score)
     {
         scoreEvent[next].Invoke(score);
+        scoreShower.setScore(this.score);
         nextScoreEvent();
+        bullet.UpdateBulletImage(next);
         updatePlayer();
     }
 

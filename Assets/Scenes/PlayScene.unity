@@ -866,7 +866,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &389241818
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2058,7 +2058,7 @@ MonoBehaviour:
   - {fileID: 3401895152816134028, guid: e75b9aecddb916a4b87282c3983341e0, type: 3}
   startPosition: {x: 0, y: 50}
   maxY: 50
-  targetPosition: {x: 0, y: 50}
+  targetPosition: {x: 0, y: 90}
   costList: 0a000000140000002800000050000000a0000000400100008002000000050000000a000000140000
   speedLevel:
   - 1
@@ -2754,7 +2754,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &927303954
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2861,7 +2861,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 957619877}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b35628e2e67de742a761c9352b1720f, type: 3}
+  m_Script: {fileID: 11500000, guid: f255178ad4a06e24f8494cd8a72d83f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   BulletImagelist:
@@ -2869,7 +2869,7 @@ MonoBehaviour:
   - {fileID: 1075233192}
   - {fileID: 1977106411}
   - {fileID: 389241817}
-  Bullet: 1
+  Bullet: 0
 --- !u!1 &1006504052
 GameObject:
   m_ObjectHideFlags: 0
@@ -2906,6 +2906,8 @@ MonoBehaviour:
   _subScore: 0
   _mulScore: 0
   _divScore: 0
+  scoreShower: {fileID: 445798690}
+  bullet: {fileID: 957619879}
 --- !u!4 &1006504054
 Transform:
   m_ObjectHideFlags: 0
@@ -3207,7 +3209,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1075233193
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5857,7 +5859,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1977106412
 RectTransform:
   m_ObjectHideFlags: 0
