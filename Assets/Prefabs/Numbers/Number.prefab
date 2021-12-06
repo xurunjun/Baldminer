@@ -234,7 +234,7 @@ MonoBehaviour:
   isBacking: 0
   lerp: 2
   speed: 2
-  targetPos: {x: 0, y: 54}
+  targetPos: {x: -16, y: 87}
   direction: {x: 0, y: 0}
   roationSpeed: 16
   baseScale: 4

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class button : MonoBehaviour
 {
-    public GameObject player;
+    public Player player;
     public GameObject GenerateManager;
     public GameObject StartGameCanvas;
     public GameObject SoundSetting;
@@ -19,15 +19,16 @@ public class button : MonoBehaviour
         stopBtn.StopEnable = false;
         SoundSetting.SetActive(false);
         StartGameCanvas.SetActive(true);
-        player.SetActive(false);
+        player.gameObject.SetActive(false);
         GenerateManager.SetActive(false);
         gameObject.SetActive(true);
+        player.reStart();
 
-        countdown.time = 60;
+        countdown.time = 120;
     }
     public void StartGameBtn()
     {
-        player.SetActive(true);
+        player.gameObject.SetActive(true);
         GenerateManager.SetActive(true);
         gameObject.SetActive(false);
         stopBtn.StopEnable = true;

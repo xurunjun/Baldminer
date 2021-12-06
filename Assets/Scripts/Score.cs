@@ -15,10 +15,9 @@ public class Score : MonoBehaviour
         Scorenum.text = "0";
     }
 
-    void Update()
+    public void setScore(int score)
     {
-        Scorenum.text = score.ToString();
+        Scorenum.text=score.ToString();
+        this.score=score;
     }
-
-
 }
