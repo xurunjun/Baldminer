@@ -9,6 +9,7 @@ public class ScoreSlider : MonoBehaviour
     public Slider SubSlider;
     public Slider MutiplySlider;
     public Slider DivitionSlider;
+    public Slider GoldSlider;
 
     public Image AddImage;
     public Image SubImage;
@@ -19,6 +20,7 @@ public class ScoreSlider : MonoBehaviour
 
     public GameManager gameManager;
     public Player player;
+    public SoundSetting soundSetting;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +35,15 @@ public class ScoreSlider : MonoBehaviour
     void Update()
     {
         ScoreSliderManager();
+
+
+        if (Time.time * 10 % 2 < 1 && GoldSlider.value == GoldSlider.maxValue)
+            GoldSlider.gameObject.SetActive(false);
+        else
+        {
+            soundSetting.audioSource.pitch = 1 + GoldSlider.value/GoldSlider.maxValue;
+            GoldSlider.gameObject.SetActive(true);
+        }
     }
 
     void ScoreSliderManager()
