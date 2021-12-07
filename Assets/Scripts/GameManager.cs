@@ -81,6 +81,7 @@ public class GameManager : Singleton<GameManager>
     {
         next = getRedom(0,scoreEvent.Count);
         setSymbol();
+        bullet.UpdateBulletImage(next);
     }
 
     public void changeScore(int score)
