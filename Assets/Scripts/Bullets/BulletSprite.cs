@@ -22,6 +22,7 @@ public class BulletSprite : MonoBehaviour
     }
 
     private void OnBecameInvisible() {
+        bullet.GetComponent<AddBullet>().StopAllCoroutines();
         if(!hasBack)
         {
             Player.Instance.isFire=false;

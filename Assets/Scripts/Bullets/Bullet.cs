@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -30,14 +31,7 @@ abstract public class Bullet : MonoBehaviour
         this.direction=direction;
         this.transform.localScale=Vector3.one*size;
         isFlying=true;
+        StartCoroutine("fly");
     }
-
-    private void Update() {
-        if(isFlying)
-        {
-            currentPos=transform.position;
-            fly();
-        }
-    }
-    abstract public void fly();
+    abstract public IEnumerator fly();
 }
