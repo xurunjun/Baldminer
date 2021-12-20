@@ -46,10 +46,6 @@ public class Number : MonoBehaviour
         transform.localScale = new Vector3(baseScale / factor, baseScale / factor, 1);
     }
 
-    private void OnDisable() {
-        rigidbody.gameObject.GetComponent<SpriteRenderer>().color=Color.red;
-    }
-
     private IEnumerator backToPlayer()
     {
         while (Vector2.Distance(transform.position, targetPos) > 2.5f)

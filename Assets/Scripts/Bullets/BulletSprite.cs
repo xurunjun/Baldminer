@@ -12,9 +12,6 @@ public class BulletSprite : MonoBehaviour
     //定义实例化事件
     public CollisionEvent collisionEvent;
 
-    //事件所使用的action
-    public UnityAction<Collision2D> action;
-
     private bool hasBack=false;
 
     private void OnEnable() {

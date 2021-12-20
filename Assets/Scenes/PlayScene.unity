@@ -228,6 +228,78 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 41385245}
   m_CullTransparentMesh: 1
+--- !u!1 &85026422
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 85026423}
+  - component: {fileID: 85026424}
+  m_Layer: 0
+  m_Name: Global Light 2D
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &85026423
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 85026422}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 100}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 519420030}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &85026424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 85026422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_LightType: 4
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.5
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1
+  m_LightVolumeOpacity: 0
+  m_ApplyToSortingLayers: 00000000
+  m_LightCookieSprite: {fileID: 0}
+  m_UseNormalMap: 0
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_ShadowIntensity: 0
+  m_ShadowVolumeIntensity: 0
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0
+  m_PointLightOuterRadius: 1
+  m_PointLightDistance: 3
+  m_PointLightQuality: 1
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 0.5
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: 0.5, z: 0}
+  - {x: -0.5, y: 0.5, z: 0}
 --- !u!1 &129976432
 GameObject:
   m_ObjectHideFlags: 0
@@ -450,7 +522,7 @@ GameObject:
   - component: {fileID: 147054954}
   - component: {fileID: 147054956}
   - component: {fileID: 147054955}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -854,6 +926,54 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &300436543
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 300436545}
+  - component: {fileID: 300436544}
+  m_Layer: 0
+  m_Name: Global Volume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &300436544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 300436543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 921cfc8d143486e4681f0fabf16e1fec, type: 2}
+--- !u!4 &300436545
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 300436543}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &310955066
 GameObject:
   m_ObjectHideFlags: 0
@@ -992,7 +1112,7 @@ GameObject:
   - component: {fileID: 362818719}
   - component: {fileID: 362818721}
   - component: {fileID: 362818720}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1142,7 +1262,7 @@ GameObject:
   - component: {fileID: 443039349}
   - component: {fileID: 443039351}
   - component: {fileID: 443039350}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1541,6 +1661,7 @@ GameObject:
   - component: {fileID: 519420030}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420032}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1568,6 +1689,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1898219260}
+  - {fileID: 85026423}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1619,6 +1741,38 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &519420032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_RenderPostProcessing: 1
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 1
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!1 &539496053
 GameObject:
   m_ObjectHideFlags: 0
@@ -1861,7 +2015,7 @@ GameObject:
   m_Component:
   - component: {fileID: 571434487}
   - component: {fileID: 571434488}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1966,7 +2120,7 @@ GameObject:
   - component: {fileID: 575024715}
   - component: {fileID: 575024714}
   - component: {fileID: 575024713}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: SoundBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2098,7 +2252,7 @@ GameObject:
   - component: {fileID: 657064255}
   - component: {fileID: 657064254}
   - component: {fileID: 657064253}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: StartGameBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2303,10 +2457,23 @@ MonoBehaviour:
   currentCost: 1
   isFire: 0
   isBack: 0
+  isFever: 1
   _addLevel: 0
   _subLevel: 0
   _mulLevel: 0
   _divLevel: 0
+  laser:
+    startPosition: {x: 0, y: 50}
+    light: {fileID: 8521924344172927003, guid: 636726ac9c5fc4643bd876461b65fd3c, type: 3}
+    accumulateEffect: {fileID: 4246098602267039201, guid: 073e86aba347f5444b8da7ce0f455a39, type: 3}
+    hasStart: 0
+    hasFinish: 0
+    isShooting: 0
+    hasCancel: 1
+    maxTime: 3
+    finishTime: 1
+    LineWidth: 25
+    rateTime: 10
   gameManager: {fileID: 1006504053}
 --- !u!1 &672268164
 GameObject:
@@ -2396,7 +2563,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 712890388}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2727,7 +2894,7 @@ GameObject:
   - component: {fileID: 859060529}
   - component: {fileID: 859060531}
   - component: {fileID: 859060530}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Checkmark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2800,7 +2967,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 867607237}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Handle Slide Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2838,7 +3005,7 @@ GameObject:
   - component: {fileID: 879754412}
   - component: {fileID: 879754414}
   - component: {fileID: 879754413}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2914,6 +3081,7 @@ GameObject:
   - component: {fileID: 891391329}
   - component: {fileID: 891391326}
   - component: {fileID: 891391328}
+  - component: {fileID: 891391330}
   m_Layer: 0
   m_Name: InputManager
   m_TagString: Untagged
@@ -2971,9 +3139,107 @@ MonoBehaviour:
   m_GameObject: {fileID: 891391325}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1902c8b7f3f0cac42b60df9acf0e6c87, type: 3}
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 751741cfc5ab57347bc85be16b03c3d7, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 53b8f970-ac9e-478c-97df-fd11d756a160
+    m_ActionName: Touch/TouchInout[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 891391330}
+        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+        m_MethodName: EndTouch
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: da552d19-dc55-42e6-b61f-0d9c3d1c439e
+    m_ActionName: Touch/TouchPress[/Mouse/press]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9cc7e83e-b3a7-41d8-a311-30626deb9cf3
+    m_ActionName: UI/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0579cd1d-7205-4498-b3db-9460d7c1c008
+    m_ActionName: UI/Submit[/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: bd14f283-8e5a-435e-9af8-c0404ee17897
+    m_ActionName: UI/Cancel[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4c10976e-81de-4ee6-bb28-5f909bf15725
+    m_ActionName: UI/Point[/Mouse/position,/Pen/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 934650b6-8abe-4454-9d93-6291e3e87f82
+    m_ActionName: UI/Click[/Mouse/leftButton,/Pen/tip]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 291c5b92-99bb-42f8-b497-2aa489718a8e
+    m_ActionName: UI/ScrollWheel[/Mouse/scroll]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e31d23ab-48e3-4052-965e-da8d6984920d
+    m_ActionName: UI/MiddleClick[/Mouse/middleButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 235060ed-8917-4629-9a4d-760a482eec6f
+    m_ActionName: UI/RightClick[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 23620ebd-0073-4d21-b9e6-1a3fe00358af
+    m_ActionName: UI/TrackedDevicePosition
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 657269c6-7f0f-4d00-a794-e73745d8658f
+    m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3ee107f9-2f8e-4e2d-85f0-0910fe8695e5
+    m_ActionName: Touch/TouchPosition[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 891391330}
+        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+        m_MethodName: HoldTouch
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 0e102786-06b8-427d-aede-9447261f1afb
+    m_ActionName: Touch/TouchHold[/Mouse/leftButton]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Touch
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 519420031}
 --- !u!114 &891391329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2989,6 +3255,78 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
+--- !u!114 &891391330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 891391325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1902c8b7f3f0cac42b60df9acf0e6c87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onHoldStartTouch:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 658162727}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: startAccumulate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onHoldPerformTouch:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 658162727}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: finishAccumulate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onHoldEndTouch:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 658162727}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: cancelAccumulate
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onEndTouch:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 658162727}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: Fire
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &901016541
 GameObject:
   m_ObjectHideFlags: 0
@@ -3297,7 +3635,7 @@ GameObject:
   - component: {fileID: 1024928962}
   - component: {fileID: 1024928961}
   - component: {fileID: 1024928963}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: SoundSetting
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4606,7 +4944,7 @@ GameObject:
   - component: {fileID: 1449395749}
   - component: {fileID: 1449395751}
   - component: {fileID: 1449395750}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5370,7 +5708,7 @@ GameObject:
   - component: {fileID: 1748651681}
   - component: {fileID: 1748651683}
   - component: {fileID: 1748651682}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5808,7 +6146,7 @@ GameObject:
   - component: {fileID: 1898219262}
   - component: {fileID: 1898219261}
   - component: {fileID: 1898219264}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: StartGameCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6060,7 +6398,7 @@ GameObject:
   - component: {fileID: 1906404577}
   - component: {fileID: 1906404579}
   - component: {fileID: 1906404578}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6135,7 +6473,7 @@ GameObject:
   - component: {fileID: 1924030271}
   - component: {fileID: 1924030273}
   - component: {fileID: 1924030272}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6268,7 +6606,7 @@ GameObject:
   - component: {fileID: 1954750823}
   - component: {fileID: 1954750825}
   - component: {fileID: 1954750824}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6499,7 +6837,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2000471288}
   - component: {fileID: 2000471289}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Toggle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6689,7 +7027,7 @@ GameObject:
   - component: {fileID: 2025583646}
   - component: {fileID: 2025583645}
   - component: {fileID: 2025583644}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}

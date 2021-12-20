@@ -1,5 +1,7 @@
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : Singleton<Player>
 {
@@ -35,6 +37,7 @@ public class Player : Singleton<Player>
     private Vector2 direction;
     public bool isFire;
     public bool isBack;
+    public bool isFever;
 
     [Header("加法等级")]
     public int _addLevel;
@@ -44,17 +47,22 @@ public class Player : Singleton<Player>
     public int _mulLevel;
     [Header("除法等级")]
     public int _divLevel;
-
+    [Header("激光")]
+    public Laser laser;
+    [Header("游戏管理器")]
     public GameManager gameManager;
     //public SoundSetting soundSetting;
 
-    public float _Mage{
-        get{
+    public float _Mage
+    {
+        get
+        {
             return currentMagn;
         }
     }
 
-    public enum LevelType{
+    public enum LevelType
+    {
         SPEED,
         SIZE,
         MAGN,
@@ -63,102 +71,131 @@ public class Player : Singleton<Player>
 
     private InputManager inputManager;
 
-    private void Awake() {
-        inputManager = InputManager.Instance;
-    }
-    void Start()
+    private void Awake()
     {
-    }
-    private void OnEnable() {
-        inputManager.onEndTouch+=Fire;
-        isFire=isBack=false;
-    }
-
-    private void OnDisable() {
-        inputManager.onEndTouch -=Fire;
+        inputManager = InputManager.Instance;
     }
 
     public void getVelocity(Vector2 value)
     {
         Vector2 pos = Camera.main.ScreenToWorldPoint(value);
-        if(pos.y>maxY)
+        if (pos.y > maxY)
         {
-            pos.y=maxY;
+            direction=Vector2.down;
         }
-        direction=(pos-startPosition).normalized;
+        else
+        {
+            direction = (pos - startPosition).normalized;
+        }
     }
 
-    public void Fire(Vector2 screenPosition,float time)
+    public void startToAccumulate(Vector2 screenPosition, InputAction.CallbackContext context)
     {
-        if(!isBack&&!isFire)
+        if (isFever)
         {
-            getVelocity(screenPosition);
-            bullet = ObjectPool.Instance.GetObject(bulletList[GameManager.Instance.getRedom(0,bulletList.Count)]);
-            bullet.transform.position = startPosition;
-            bullet.GetComponent<AddBullet>().startFly(currentSpeed,direction,currentSize);
+            Debug.Log(screenPosition);
+        }
+    }
 
-            isFire=true;
+    public void startAccumulate()
+    {
+        if (isFever && !isFire)
+        {
+            laser.startAccumulate();
+        }
+    }
+
+    public void finishAccumulate()
+    {
+        laser.finishAccumulate();
+    }
+
+    public void cancelAccumulate(Vector2 screenPosition, float duration)
+    {
+        getVelocity(screenPosition);
+        laser.shotLaser(direction, duration);
+    }
+
+    public void Fire(Vector2 screenPosition, InputAction.CallbackContext context)
+    {
+        if (!isFever)
+        {
+            isFire = true;
+            getVelocity(screenPosition);
+            shotBullet();
+        }
+    }
+
+    private void shotBullet()
+    {
+        if (!isBack && !isFire)
+        {
+            bullet = ObjectPool.Instance.GetObject(bulletList[0]);
+            bullet.transform.position = startPosition;
+            bullet.GetComponent<AddBullet>().startFly(currentSpeed, direction, currentSize);
+
+            isFire = true;
         }
     }
 
     public void LevelUp(LevelType type)
     {
         int index;
-        switch(type)
+        switch (type)
         {
             case LevelType.SPEED:
-            index = speedLevel.IndexOf(currentSpeed)+1;
+                index = speedLevel.IndexOf(currentSpeed) + 1;
 
-            if (index < speedLevel.Count)
-            {
-                 _addLevel = index;
-                 currentSpeed = speedLevel[index];
-            }
-            break;
+                if (index < speedLevel.Count)
+                {
+                    _addLevel = index;
+                    currentSpeed = speedLevel[index];
+                }
+                break;
             case LevelType.SIZE:
-            index = sizeLevel.IndexOf(currentSize)+1;
+                index = sizeLevel.IndexOf(currentSize) + 1;
 
-            if (index < sizeLevel.Count)
-            {
-                _subLevel = index;
-                currentSize = sizeLevel[index];
-            }
-            break;
+                if (index < sizeLevel.Count)
+                {
+                    _subLevel = index;
+                    currentSize = sizeLevel[index];
+                }
+                break;
             case LevelType.MAGN:
-            index = MagnLevel.IndexOf(currentMagn)+1;
-            
-            if (index < MagnLevel.Count)
-            {
-               _mulLevel = index;
-               currentMagn = MagnLevel[index];
-            }
-            break;
-            case LevelType.COST:
-            index = costLevel.IndexOf(currentCost)+1;
+                index = MagnLevel.IndexOf(currentMagn) + 1;
 
-            if (index < costLevel.Count)
-            {
-                _divLevel = index;
-                currentCost = costLevel[index];
-            }
-            break;
+                if (index < MagnLevel.Count)
+                {
+                    _mulLevel = index;
+                    currentMagn = MagnLevel[index];
+                }
+                break;
+            case LevelType.COST:
+                index = costLevel.IndexOf(currentCost) + 1;
+
+                if (index < costLevel.Count)
+                {
+                    _divLevel = index;
+                    currentCost = costLevel[index];
+                }
+                break;
         }
     }
 
     public int getCost(LevelType type)
     {
-        switch(type)
+        switch (type)
         {
             case LevelType.SPEED:
-            return (int)(costList[speedLevel.IndexOf(currentSpeed)]*currentCost);
+                return (int)(costList[speedLevel.IndexOf(currentSpeed)] * currentCost);
             case LevelType.SIZE:
-            return (int)(costList[sizeLevel.IndexOf(currentSize)]*currentCost);
+                return (int)(costList[sizeLevel.IndexOf(currentSize)] * currentCost);
             case LevelType.MAGN:
-            return (int)(costList[MagnLevel.IndexOf(currentMagn)]*currentCost);
+                return (int)(costList[MagnLevel.IndexOf(currentMagn)] * currentCost);
             case LevelType.COST:
-            return (int)(costList[costLevel.IndexOf(currentCost)]*currentCost);
+                return (int)(costList[costLevel.IndexOf(currentCost)] * currentCost);
         }
-        return costList[costList.Count-1];
+        return costList[costList.Count - 1];
     }
 
     public void reStart()
