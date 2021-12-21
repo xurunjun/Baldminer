@@ -16,6 +16,10 @@ public class Laser
     private GameObject effect;
     [Header("蓄力特效")]
     public GameObject accumulateEffect;
+
+    private GameObject finishEffect;
+    [Header("蓄满特效")]
+    public GameObject FinishEffect;
     public bool hasStart;
 
     public bool hasFinish;
@@ -64,7 +68,21 @@ public class Laser
             hasFinish = true;
             ParticleSystem.EmissionModule emission = effect.GetComponent<ParticleSystem>().emission;
             emission.rateOverTime = 0;
+            startFinishEffect();
         }
+    }
+
+    private async void startFinishEffect()
+    {
+        await Task.Delay(4 * 100);
+        finishEffect = ObjectPool.Instance.GetObject(FinishEffect);
+        finishEffect.transform.position = startPosition;
+    }
+
+    private void clearFinishEffect()
+    {
+        ObjectPool.Instance.PushObject(finishEffect);
+        finishEffect = null;
     }
 
     #region lightShot
@@ -83,6 +101,7 @@ public class Laser
             if (hasFinish)
             {
                 factor = 1;
+                clearFinishEffect();
             }
             if (factor > 0.2f)
             {
