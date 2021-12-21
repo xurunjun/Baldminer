@@ -10,6 +10,8 @@ public class EndGame : MonoBehaviour
 
     public Countdown countdown;
     public StopBtn stopBtn;
+    public SoundSetting soundSetting;
+    public Player player;
     public Score score;
     public Text EndScore;
 
@@ -34,8 +36,15 @@ public class EndGame : MonoBehaviour
 
         stopBtn.Player.SetActive(true);
         stopBtn.Generater.SetActive(true);
+        player.gameObject.SetActive(true);
 
-        countdown.time = 60;
+        player.reStart();
+        score.setScore(0);
+        countdown.time = 120;
+        stopBtn.StopWindow.SetActive(false);
+
+        if (soundSetting.bgmtoggle.isOn)
+            soundSetting.audioSource.gameObject.SetActive(true);
     }
 
     public void Update()

@@ -38,6 +38,7 @@ public class GameManager : Singleton<GameManager>
     {
         Random.InitState(seed);
         scoreEvent = new List<ScoreEvent>();
+        Applicantion.targetFrameRate = 30;
         scoreEvent.Add(new ScoreEvent());
         scoreEvent.Add(new ScoreEvent());
         scoreEvent.Add(new ScoreEvent());
@@ -81,6 +82,7 @@ public class GameManager : Singleton<GameManager>
     {
         next = getRedom(0,scoreEvent.Count);
         setSymbol();
+        bullet.UpdateBulletImage(next);
     }
 
     public void changeScore(int score)
