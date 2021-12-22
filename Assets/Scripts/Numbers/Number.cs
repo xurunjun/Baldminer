@@ -86,7 +86,7 @@ public class Number : MonoBehaviour
     public void OnCollisionAction(Collision2D other) {
         if(other.gameObject.tag=="bullet")
         {
-            speed = Player.Instance.currentSpeed;
+            speed = Player.Instance._Speed;
             isBacking=true;
             animator.SetBool("isbacking",true);
             rigidbody.interpolation=RigidbodyInterpolation2D.None;

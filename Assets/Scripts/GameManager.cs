@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -36,7 +37,7 @@ public class GameManager : Singleton<GameManager>
     private List<ScoreEvent> scoreEvent;
     private void Awake()
     {
-        Random.InitState(seed);
+        UnityEngine.Random.InitState(seed);
         scoreEvent = new List<ScoreEvent>();
         Application.targetFrameRate = 30;
         scoreEvent.Add(new ScoreEvent());
@@ -50,25 +51,31 @@ public class GameManager : Singleton<GameManager>
         nextScoreEvent();
     }
 
-    private void addScroe(int score)
+    public void RandomSeed()
+    {
+        seed = UnityEngine.Random.Range(0,1000);
+        UnityEngine.Random.InitState(seed);
+    }
+
+    public void addScroe(int score)
     {
         this.score += (int)(score*Player.Instance._Mage);
         _addScore+=score;
     }
 
-    private void subScore(int score)
+    public void subScore(int score)
     {
         this.score -= (int)(score*Player.Instance._Mage);
         _subScore+=score;
     }
 
-    private void mulScore(int score)
+    public void mulScore(int score)
     {
         this.score*=(int)(score*Player.Instance._Mage);
         _mulScore+=score;
     }
 
-    private void divScore(int score)
+    public void divScore(int score)
     {
         _divScore+=score;
         if(score==0)
@@ -140,11 +147,11 @@ public class GameManager : Singleton<GameManager>
 
     public int getRedom(int minValue, int maxValue)
     {
-        return Random.Range(minValue, maxValue);
+        return UnityEngine.Random.Range(minValue, maxValue);
     }
 
     public float getRedom(float minValue, float maxValue)
     {
-        return Random.Range(minValue, maxValue);
+        return UnityEngine.Random.Range(minValue, maxValue);
     }
 }

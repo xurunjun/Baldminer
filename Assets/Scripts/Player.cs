@@ -24,14 +24,10 @@ public class Player : Singleton<Player>
     public List<float> MagnLevel;
     [Header("花费等级")]
     public List<float> costLevel;
-    [Header("当前速度")]
-    public float currentSpeed;
-    [Header("当前大小")]
-    public float currentSize;
-    [Header("当前倍率")]
-    public float currentMagn;
-    [Header("当前花费")]
-    public float currentCost;
+    private float currentSpeed;
+    private float currentSize;
+    private float currentMagn;
+    private float currentCost;
     private Vector2 direction;
     public bool isFire;
     public bool isBack;
@@ -47,6 +43,12 @@ public class Player : Singleton<Player>
 
     public GameManager gameManager;
     //public SoundSetting soundSetting;
+
+    public float _Speed{
+        get{
+            return currentSpeed;
+        }
+    }
 
     public float _Mage{
         get{
@@ -65,6 +67,10 @@ public class Player : Singleton<Player>
 
     private void Awake() {
         inputManager = InputManager.Instance;
+        currentSpeed=speedLevel[0];
+        currentSize=sizeLevel[0];
+        currentMagn=MagnLevel[0];
+        currentCost=costLevel[0];
     }
     void Start()
     {
