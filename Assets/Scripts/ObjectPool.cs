@@ -21,6 +21,19 @@ public class ObjectPool
         }
     }
 
+    public int getPoolQueueSize(GameObject prefab)
+    {
+        if(pooldic.ContainsKey(prefab.name))
+            return pooldic[prefab.name].Count;
+    
+        return 0;
+    }
+
+    public int getPoolSize()
+    {
+        return pooldic.Count;
+    }
+
     public GameObject GetObject(GameObject prefab){
         GameObject _object;
         if(!pooldic.ContainsKey(prefab.name)||pooldic[prefab.name].Count==0)
