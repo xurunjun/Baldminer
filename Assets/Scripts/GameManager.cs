@@ -53,7 +53,7 @@ public class GameManager : Singleton<GameManager>
 
     public void RandomSeed()
     {
-        seed = UnityEngine.Random.Range(0,1000);
+        seed = (int)(DateTime.Now.Ticks%1000);
         UnityEngine.Random.InitState(seed);
     }
 

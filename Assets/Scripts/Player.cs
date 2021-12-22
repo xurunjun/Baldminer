@@ -24,11 +24,11 @@ public class Player : Singleton<Player>
     public List<float> MagnLevel;
     [Header("花费等级")]
     public List<float> costLevel;
-    private float currentSpeed;
-    private float currentSize;
-    private float currentMagn;
-    private float currentCost;
-    private Vector2 direction;
+    public float currentSpeed;
+    public float currentSize;
+    public float currentMagn;
+    public float currentCost;
+    public Vector2 direction;
     public bool isFire;
     public bool isBack;
 
