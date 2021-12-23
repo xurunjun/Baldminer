@@ -116,7 +116,7 @@ public class Player : Singleton<Player>
         laser.shotLaser(direction, duration);
     }
 
-    public void Fire(Vector2 screenPosition, InputAction.CallbackContext context)
+    public void Fire(Vector2 screenPosition)
     {
         if (!isFever)
         {

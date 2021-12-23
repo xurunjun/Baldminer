@@ -2463,9 +2463,9 @@ MonoBehaviour:
   _divLevel: 0
   laser:
     startPosition: {x: 0, y: 50}
-    light: {fileID: 8521924344172927003, guid: 636726ac9c5fc4643bd876461b65fd3c, type: 3}
-    accumulateEffect: {fileID: 4246098602267039201, guid: 073e86aba347f5444b8da7ce0f455a39, type: 3}
-    FinishEffect: {fileID: 6789564771431851816, guid: f76529c34ca229f468ae842a5773bf9b, type: 3}
+    light: {fileID: 8521924344172927003, guid: b865d1d1ad89dcb44bcbaa344e3f79e8, type: 3}
+    accumulateEffect: {fileID: 4246098602267039201, guid: 1e8060a8d69022341a87b2c2fccdca9c, type: 3}
+    FinishEffect: {fileID: 6789564771431851816, guid: 11ba38c176763074a95230758d759b3b, type: 3}
     hasStart: 0
     hasFinish: 0
     isShooting: 0
@@ -3608,7 +3608,7 @@ MonoBehaviour:
   _subScore: 0
   _mulScore: 0
   _divScore: 0
-  FeverCost: 1
+  FeverCost: 10
   FeverTime: 20
   scoreShower: {fileID: 445798690}
   bullet: {fileID: 957619879}

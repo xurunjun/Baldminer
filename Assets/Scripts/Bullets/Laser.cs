@@ -120,6 +120,7 @@ public class Laser
             if (hasFinish)
             {
                 factor = 1;
+                clearFinishEffect();
             }
             if (factor > 0.2f)
             {

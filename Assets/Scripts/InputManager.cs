@@ -6,7 +6,7 @@ using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 [Serializable]
-public class TouchEvent : UnityEvent<Vector2, InputAction.CallbackContext> { }
+public class TouchEvent : UnityEvent<Vector2> { }
 [Serializable]
 public class HoldEndTouch : UnityEvent<Vector2,float> { }
 [DefaultExecutionOrder(-1)]
@@ -28,7 +28,7 @@ public class InputManager : Singleton<InputManager>
 
         if (context.performed)
         {
-            onEndTouch.Invoke(touchPosition.ReadValue<Vector2>(), context);
+            onEndTouch.Invoke(touchPosition.ReadValue<Vector2>());
             // Debug.Log("end");
         }
     }

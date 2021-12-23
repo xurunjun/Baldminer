@@ -21,7 +21,7 @@ abstract public class Bullet : MonoBehaviour
     [Header("爆炸效果")]
     public GameObject explose;
 
-    private void OnEnable() {
+    public void OnEnable() {
         isFlying=false;
     }
 
