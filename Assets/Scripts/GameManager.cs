@@ -1,9 +1,12 @@
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 
 public class ScoreEvent : UnityEvent<int> { }
+[System.Serializable]
+public class FeverEvent : UnityEvent<bool> { }
 [DefaultExecutionOrder(-1)]
 public class GameManager : Singleton<GameManager>
 {
@@ -21,6 +24,28 @@ public class GameManager : Singleton<GameManager>
     public int _mulScore;
     [Header("除法分数")]
     public int _divScore;
+    [Header("Fever花费")]
+    public int FeverCost;
+    [Header("Fever时间")]
+    public int FeverTime;
+    private int feverNum;
+
+    public int _FeverNum
+    {
+        get
+        {
+            return feverNum;
+        }
+        set
+        {
+            feverNum += value;
+            if (feverNum > FeverCost)
+            {
+                _Fever = true;
+                feverNum = 0;
+            }
+        }
+    }
     [Header("分数显示器")]
     public Score scoreShower;
     [Header("子弹显示器")]
@@ -33,7 +58,32 @@ public class GameManager : Singleton<GameManager>
             return next;
         }
     }
-    private UnityAction<int> action;
+    private bool isFever = false;
+
+    public bool _Fever
+    {
+        get
+        {
+            return isFever;
+        }
+        set
+        {
+            isFever = value;
+            if (value)
+            {
+                endFever();
+            }
+            feverEvent.Invoke(value);
+        }
+    }
+
+    public FeverEvent feverEvent;
+
+    private async void endFever()
+    {
+        await Task.Delay(FeverTime * 1000);
+        _Fever = false;
+    }
 
     private List<ScoreEvent> scoreEvent;
     private void Awake()
@@ -88,7 +138,7 @@ public class GameManager : Singleton<GameManager>
     {
         next = getRedom(0, scoreEvent.Count);
         setSymbol();
-        bullet.UpdateBulletImage(next);
+        // bullet.UpdateBulletImage(next);
     }
 
     public void changeScore(int score)
@@ -97,6 +147,17 @@ public class GameManager : Singleton<GameManager>
         scoreShower.setScore(this.score);
         nextScoreEvent();
         bullet.UpdateBulletImage(next);
+        updatePlayer();
+        _FeverNum = 1;
+    }
+
+    public void addScoreInFever(int score)
+    {
+        this.score += score;
+        _addScore += 1;
+        _subScore += 1;
+        _mulScore += 1;
+        scoreShower.setScore(this.score);
         updatePlayer();
     }
 

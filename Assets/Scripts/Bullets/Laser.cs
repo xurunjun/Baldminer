@@ -109,6 +109,8 @@ public class Laser
                 shotingLight.transform.position = startPosition;
                 shotingLight.transform.rotation = getRadius(direction);
                 shotingLight.GetComponentInChildren<LineRenderer>().widthMultiplier = factor * LineWidth;
+                shotingLight.transform.localScale = new Vector3(factor, 1, 1);
+                shotingLight.GetComponentInChildren<BoxCollider2D>().enabled = true;
                 Shotting(factor * maxTime);
             }
             else
@@ -124,13 +126,16 @@ public class Laser
     private async void Shotting(float duration)
     {
         await Task.Delay((int)(duration * 1000));
+        shotingLight.GetComponentInChildren<BoxCollider2D>().enabled = false;
         shotingLight.GetComponentInChildren<LineRenderer>().widthMultiplier = LineWidth;
+        shotingLight.transform.localScale = Vector3.one;
         ObjectPool.Instance.PushObject(shotingLight);
         shotingLight = null;
         hasStart = false;
         hasFinish = false;
         isShooting = false;
         hasCancel = true;
+        Player.Instance.isLaser = false;
     }
     #endregion
 }

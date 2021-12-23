@@ -37,7 +37,6 @@ public class Player : Singleton<Player>
     private Vector2 direction;
     public bool isFire;
     public bool isBack;
-    public bool isFever;
 
     [Header("加法等级")]
     public int _addLevel;
@@ -51,7 +50,10 @@ public class Player : Singleton<Player>
     public Laser laser;
     [Header("游戏管理器")]
     public GameManager gameManager;
-    //public SoundSetting soundSetting;
+
+    public bool isLaser = false;
+
+    private bool isFever = false;
 
     public float _Mage
     {
@@ -81,7 +83,7 @@ public class Player : Singleton<Player>
         Vector2 pos = Camera.main.ScreenToWorldPoint(value);
         if (pos.y > maxY)
         {
-            direction=Vector2.down;
+            direction = Vector2.down;
         }
         else
         {
@@ -89,18 +91,16 @@ public class Player : Singleton<Player>
         }
     }
 
-    public void startToAccumulate(Vector2 screenPosition, InputAction.CallbackContext context)
+    public void switchFever(bool isFever)
     {
-        if (isFever)
-        {
-            Debug.Log(screenPosition);
-        }
+        this.isFever = isFever;
     }
 
     public void startAccumulate()
     {
         if (isFever && !isFire)
         {
+            isLaser = true;
             laser.startAccumulate();
         }
     }
@@ -120,7 +120,6 @@ public class Player : Singleton<Player>
     {
         if (!isFever)
         {
-            isFire = true;
             getVelocity(screenPosition);
             shotBullet();
         }
@@ -128,8 +127,9 @@ public class Player : Singleton<Player>
 
     private void shotBullet()
     {
-        if (!isBack && !isFire)
+        if (!isBack && !isFire && !isLaser)
         {
+            isFire = true;
             bullet = ObjectPool.Instance.GetObject(bulletList[0]);
             bullet.transform.position = startPosition;
             bullet.GetComponent<AddBullet>().startFly(currentSpeed, direction, currentSize);

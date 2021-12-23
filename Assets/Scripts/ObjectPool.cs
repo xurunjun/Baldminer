@@ -7,13 +7,15 @@ public class ObjectPool
 {
     private static ObjectPool _instance;
 
-    private Dictionary<string,Queue<GameObject>> pooldic = new Dictionary<string, Queue<GameObject>>();
+    private Dictionary<string, Queue<GameObject>> pooldic = new Dictionary<string, Queue<GameObject>>();
 
     private GameObject pool;
 
-    public static ObjectPool Instance{
-        get{
-            if(_instance==null)
+    public static ObjectPool Instance
+    {
+        get
+        {
+            if (_instance == null)
             {
                 _instance = new ObjectPool();
             }
@@ -21,20 +23,21 @@ public class ObjectPool
         }
     }
 
-    public GameObject GetObject(GameObject prefab){
+    public GameObject GetObject(GameObject prefab)
+    {
         GameObject _object;
-        if(!pooldic.ContainsKey(prefab.name)||pooldic[prefab.name].Count==0)
+        if (!pooldic.ContainsKey(prefab.name) || pooldic[prefab.name].Count == 0)
         {
             _object = GameObject.Instantiate(prefab);
             PushObject(_object);
-            if(pool==null)
+            if (pool == null)
             {
                 pool = new GameObject("ObjectPool");
             }
-            GameObject childPool = GameObject.Find(prefab.name+"Pool");
-            if(!childPool)
+            GameObject childPool = GameObject.Find(prefab.name + "Pool");
+            if (!childPool)
             {
-                childPool = new GameObject(prefab.name+"Pool");
+                childPool = new GameObject(prefab.name + "Pool");
                 childPool.transform.SetParent(pool.transform);
             }
             _object.transform.SetParent(childPool.transform);
@@ -46,12 +49,23 @@ public class ObjectPool
 
     public void PushObject(GameObject prefab)
     {
-        string _name = prefab.name.Replace("(Clone)",string.Empty);
-        if(!pooldic.ContainsKey(_name))
+        string _name = prefab.name.Replace("(Clone)", string.Empty);
+        if (!pooldic.ContainsKey(_name))
         {
-            pooldic.Add(_name,new Queue<GameObject>());
+            pooldic.Add(_name, new Queue<GameObject>());
         }
         pooldic[_name].Enqueue(prefab);
         prefab.SetActive(false);
+    }
+
+    public void pushInChildPool(GameObject prefab)
+    {
+        GameObject childPool = GameObject.Find(prefab.name + "Pool");
+        if (!childPool)
+        {
+            childPool = new GameObject(prefab.name + "Pool");
+            childPool.transform.SetParent(pool.transform);
+        }
+        prefab.transform.SetParent(childPool.transform);
     }
 }

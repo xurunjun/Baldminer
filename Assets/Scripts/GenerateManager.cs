@@ -42,9 +42,32 @@ public class GenerateManager : Singleton<GenerateManager>
     [Header("当前物体数量")]
     public int itemNum = 0;
 
+    [Header("轨道")]
+    public RailController rail;
+
+    private bool isFever = false;
+
     private void Start()
     {
         StartCoroutine("brithNumbers");
+    }
+
+    public void Fever(bool value)
+    {
+        if (value)
+        {
+            isFever = true;
+            StopCoroutine("brithNumbers");
+            clearAllChildrenObject();
+            rail.isStop = false;
+            rail.startToBrith();
+        }
+        else
+        {
+            isFever = false;
+            rail.stop();
+            addNumbers();
+        }
     }
     bool nextTimer(float deltaTime)
     {
@@ -97,14 +120,18 @@ public class GenerateManager : Singleton<GenerateManager>
 
     public void clearAllChildrenObject()
     {
-        while(transform.childCount!=0)
+        while (transform.childCount > 1)
         {
-            ObjectPool.Instance.PushObject(transform.GetChild(0).gameObject);
+            GameObject childObject = transform.GetChild(1).gameObject;
+            ObjectPool.Instance.pushInChildPool(childObject);
+            ObjectPool.Instance.PushObject(childObject);
         }
+        itemNum = 0;
     }
 
     public void addNumbers()
     {
-        StartCoroutine("brithNumbers");
+        if (!isFever)
+            StartCoroutine("brithNumbers");
     }
 }
