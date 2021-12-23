@@ -39,7 +39,7 @@ public class GameManager : Singleton<GameManager>
         set
         {
             feverNum += value;
-            if (feverNum > FeverCost)
+            if (feverNum >= FeverCost)
             {
                 _Fever = true;
                 feverNum = 0;
@@ -50,6 +50,7 @@ public class GameManager : Singleton<GameManager>
     public Score scoreShower;
     [Header("子弹显示器")]
     public BulletIcon bullet;
+    public UnityEvent restartEvent;
     private int next;
     public int _NEXT
     {
@@ -100,6 +101,12 @@ public class GameManager : Singleton<GameManager>
         scoreEvent[2].AddListener(mulScore);
         scoreEvent[3].AddListener(divScore);
         nextScoreEvent();
+    }
+
+    public void RestartGame()
+    {
+        _Fever = false;
+        restartEvent.Invoke();
     }
 
     private void addScroe(int score)

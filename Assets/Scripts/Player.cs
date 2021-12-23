@@ -216,4 +216,11 @@ public class Player : Singleton<Player>
         _mulLevel = 0;
         _divLevel = 0;
     }
+
+    public void RestartGame()
+    {
+        isFire = false;
+        isBack = false;
+        isLaser = false;
+    }
 }

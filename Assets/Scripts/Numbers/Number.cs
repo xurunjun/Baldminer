@@ -37,7 +37,7 @@ public class Number : MonoBehaviour
         rigidbody.velocity = Vector2.zero;
         rigidbody.angularVelocity = 0;
         rigidbody.transform.rotation = Quaternion.identity;
-        rigidbody.transform.localPosition=Vector3.zero;
+        rigidbody.transform.localPosition = Vector3.zero;
     }
 
     public void setScore(int factor)
@@ -60,6 +60,7 @@ public class Number : MonoBehaviour
         }
         isBacking = false;
         animator.SetBool("isbacking", false);
+        animator.SetBool("isDestory", true);
         rigidbody.velocity = Vector2.zero;
         transform.position = targetPos;
         Player.Instance.isBack = false;
@@ -72,6 +73,7 @@ public class Number : MonoBehaviour
         {
             yield return null;
         }
+        animator.SetBool("isDestory", false);
         GameManager.Instance.changeScore(score);
         GenerateManager.Instance.itemNum--;
         GenerateManager.Instance.addNumbers();
