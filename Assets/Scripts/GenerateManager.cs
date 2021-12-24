@@ -38,17 +38,41 @@ public class GenerateManager : Singleton<GenerateManager>
     public List<int> numList;
     [Header("生成间隔")]
     public float time;
-    private float timer=0;
+    private float timer = 0;
     [Header("当前物体数量")]
-    public int itemNum=0;
+    public int itemNum = 0;
 
-    private void Awake() {
+    [Header("轨道")]
+    public RailController rail;
+
+    private bool isFever = false;
+
+    private void Start()
+    {
+        StartCoroutine("brithNumbers");
     }
 
+    public void Fever(bool value)
+    {
+        if (value)
+        {
+            isFever = true;
+            StopCoroutine("brithNumbers");
+            clearAllChildrenObject();
+            rail.isStop = false;
+            rail.startToBrith();
+        }
+        else
+        {
+            isFever = false;
+            rail.stop();
+            addNumbers();
+        }
+    }
     bool nextTimer(float deltaTime)
     {
-        timer+=deltaTime;
-        if(timer>time)
+        timer += deltaTime;
+        if (timer > time)
         {
             return true;
         }
@@ -57,7 +81,7 @@ public class GenerateManager : Singleton<GenerateManager>
 
     bool reachMaxItem()
     {
-        if(itemNum<maxItem)
+        if (itemNum < maxItem)
         {
             return true;
         }
@@ -66,27 +90,48 @@ public class GenerateManager : Singleton<GenerateManager>
 
     void clearTimer()
     {
-        timer=0;
+        timer = 0;
     }
 
     Vector3 getElementPosition()
     {
-        return new Vector3(Random.Range(-maxWidth,maxWidth)+anchorX,
-        Random.Range(-maxHight,maxHight)+anchorY,anchorZ);
+        return new Vector3(Random.Range(-maxWidth, maxWidth) + anchorX,
+        Random.Range(-maxHight, maxHight) + anchorY, anchorZ);
     }
 
-    // Update is called once per frame
-    void Update()
+    private IEnumerator brithNumbers()
     {
-        if(reachMaxItem()&&nextTimer(Time.deltaTime))
+        while (reachMaxItem())
         {
-            GameObject _Instance = ObjectPool.Instance.GetObject(Elements[GameManager.Instance.getRedom(0,Elements.Count)]);
-            _Instance.transform.position=getElementPosition();
-            _Instance.transform.parent = this.transform;
-            _Instance.GetComponent<Number>().setScore(numList[GameManager.Instance.getRedom(0,numList.Count)]);
-            PolygonCollider2D collider = _Instance.GetComponent<PolygonCollider2D>();
-            clearTimer();
-            itemNum++;
+            if (nextTimer(Time.deltaTime))
+            {
+                GameObject _Instance = ObjectPool.Instance.GetObject(Elements[GameManager.Instance.getRedom(0, Elements.Count)]);
+                _Instance.transform.position = getElementPosition();
+                _Instance.transform.parent = this.transform;
+                _Instance.GetComponent<Number>().setScore(numList[GameManager.Instance.getRedom(0, numList.Count)]);
+                PolygonCollider2D collider = _Instance.GetComponent<PolygonCollider2D>();
+                clearTimer();
+                itemNum++;
+            }
+
+            yield return null;
         }
+    }
+
+    public void clearAllChildrenObject()
+    {
+        while (transform.childCount > 1)
+        {
+            GameObject childObject = transform.GetChild(1).gameObject;
+            ObjectPool.Instance.pushInChildPool(childObject);
+            ObjectPool.Instance.PushObject(childObject);
+        }
+        itemNum = 0;
+    }
+
+    public void addNumbers()
+    {
+        if (!isFever)
+            StartCoroutine("brithNumbers");
     }
 }

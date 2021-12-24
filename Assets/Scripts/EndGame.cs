@@ -14,6 +14,7 @@ public class EndGame : MonoBehaviour
     public Player player;
     public Score score;
     public Text EndScore;
+    public GameManager gameManager;
 
     public void Start()
     {
@@ -45,6 +46,8 @@ public class EndGame : MonoBehaviour
 
         if (soundSetting.bgmtoggle.isOn)
             soundSetting.audioSource.gameObject.SetActive(true);
+
+        gameManager.RestartGame();
     }
 
     public void Update()

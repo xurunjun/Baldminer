@@ -13,7 +13,7 @@ public class Countdown : MonoBehaviour
     public float time = 60;
     public void TimeLeft()
     {
-        if(stopBtn.StopWindow.active == false)
+        if(stopBtn.StopWindow.activeSelf == false)
             time -= Time.deltaTime;
 
         if (time <= 0)

@@ -1,9 +1,12 @@
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-
+using System;
 
 public class ScoreEvent : UnityEvent<int> { }
+[System.Serializable]
+public class FeverEvent : UnityEvent<bool> { }
 [DefaultExecutionOrder(-1)]
 public class GameManager : Singleton<GameManager>
 {
@@ -21,24 +24,77 @@ public class GameManager : Singleton<GameManager>
     public int _mulScore;
     [Header("除法分数")]
     public int _divScore;
+    [Header("Fever花费")]
+    public int FeverCost;
+    [Header("Fever时间")]
+    public int FeverTime;
+    private int feverNum;
+
+    public int _FeverNum
+    {
+        get
+        {
+            return feverNum;
+        }
+        set
+        {
+            feverNum += value;
+            if (feverNum >= FeverCost)
+            {
+                _Fever = true;
+                feverNum = 0;
+            }
+        }
+    }
     [Header("分数显示器")]
     public Score scoreShower;
     [Header("子弹显示器")]
     public BulletIcon bullet;
+    public UnityEvent restartEvent;
     private int next;
-    public int _NEXT{
-        get{
+    public int _NEXT
+    {
+        get
+        {
             return next;
         }
     }
-    private UnityAction<int> action;
+    public bool isFever = false;
+
+    public bool _Fever
+    {
+        get
+        {
+            return isFever;
+        }
+        set
+        {
+            isFever = value;
+            if (value)
+            {
+                endFever();
+            }
+            feverEvent.Invoke(value);
+        }
+    }
+
+    public FeverEvent feverEvent;
+
+    private async void endFever()
+    {
+        await Task.Delay(FeverTime * 1000);
+        _Fever = false;
+    }
 
     private List<ScoreEvent> scoreEvent;
     private void Awake()
     {
-        Random.InitState(seed);
-        scoreEvent = new List<ScoreEvent>();
+        UnityEngine.Random.InitState(seed);
         Application.targetFrameRate = 30;
+        scoreEvent = new List<ScoreEvent>();
+
+        Application.targetFrameRate = 30;
+
         scoreEvent.Add(new ScoreEvent());
         scoreEvent.Add(new ScoreEvent());
         scoreEvent.Add(new ScoreEvent());
@@ -50,39 +106,55 @@ public class GameManager : Singleton<GameManager>
         nextScoreEvent();
     }
 
-    private void addScroe(int score)
+    public void RandomSeed()
     {
-        this.score += (int)(score*Player.Instance._Mage);
-        _addScore+=score;
+        seed = (int)(DateTime.Now.Ticks%1000);
+        UnityEngine.Random.InitState(seed);
     }
 
-    private void subScore(int score)
+    public void RestartGame()
     {
-        this.score -= (int)(score*Player.Instance._Mage);
-        _subScore+=score;
+        _Fever = false;
+        restartEvent.Invoke();
     }
 
-    private void mulScore(int score)
+    public void addScroe(int score)
     {
-        this.score*=(int)(score*Player.Instance._Mage);
-        _mulScore+=score;
+        this.score += (int)(score + Player.Instance._Mage);
+        _addScore += score;
     }
 
-    private void divScore(int score)
+    public void subScore(int score)
     {
-        _divScore+=score;
-        if(score==0)
+        this.score -= (int)(score - Player.Instance._Mage);
+        _subScore += score;
+    }
+
+    public void mulScore(int score)
+    {
+        this.score *= (int)(score * Player.Instance._Mage);
+        _mulScore += score;
+    }
+
+    public void divScore(int score)
+    {
+        _divScore += score;
+        _addScore += score;
+        _subScore += score;
+        _mulScore += score;
+        score = (int)(score / Player.Instance._Mage);
+        if (score == 0)
         {
-            score=1;
+            score = 1;
         }
-        this.score/=(int)(score*Player.Instance._Mage);
+        this.score /= score;
     }
 
     public void nextScoreEvent()
     {
-        next = getRedom(0,scoreEvent.Count);
+        next = getRedom(0, scoreEvent.Count);
         setSymbol();
-        bullet.UpdateBulletImage(next);
+        // bullet.UpdateBulletImage(next);
     }
 
     public void changeScore(int score)
@@ -90,60 +162,72 @@ public class GameManager : Singleton<GameManager>
         scoreEvent[next].Invoke(score);
         scoreShower.setScore(this.score);
         nextScoreEvent();
+        bullet.UpdateBulletImage(next);
+        updatePlayer();
+        _FeverNum = 1;
+    }
+
+    public void addScoreInFever(int score)
+    {
+        this.score += score;
+        _addScore += 1;
+        _subScore += 1;
+        _mulScore += 1;
+        scoreShower.setScore(this.score);
         updatePlayer();
     }
 
     public void updatePlayer()
     {
-        if(_addScore>Player.Instance.getCost(Player.LevelType.SPEED))
+        if (_addScore > Player.Instance.getCost(Player.LevelType.SPEED))
         {
-            _addScore=0;
+            _addScore = 0;
             Player.Instance.LevelUp(Player.LevelType.SPEED);
         }
-        if(_subScore>Player.Instance.getCost(Player.LevelType.SIZE))
+        if (_subScore > Player.Instance.getCost(Player.LevelType.SIZE))
         {
-            _subScore=0;
+            _subScore = 0;
             Player.Instance.LevelUp(Player.LevelType.SIZE);
         }
-        if(_mulScore>Player.Instance.getCost(Player.LevelType.MAGN))
+        if (_mulScore > Player.Instance.getCost(Player.LevelType.MAGN))
         {
-            _mulScore=0;
+            _mulScore = 0;
             Player.Instance.LevelUp(Player.LevelType.MAGN);
         }
-        if(_divScore>Player.Instance.getCost(Player.LevelType.COST))
+        if (_divScore > Player.Instance.getCost(Player.LevelType.COST))
         {
-            _divScore=0;
+            _divScore = 0;
             Player.Instance.LevelUp(Player.LevelType.COST);
         }
     }
 
     public void setSymbol()
     {
-        switch(next)
+        switch (next)
         {
             case 0:
-            symbol="+";
-            break;
+                symbol = "+";
+                break;
             case 1:
-            symbol="-";
-            break;
+                symbol = "-";
+                break;
             case 2:
-            symbol="*";
-            break;
+                symbol = "*";
+                break;
             case 3:
-            symbol="/";
-            break;
+                symbol = "/";
+                break;
 
         }
     }
 
     public int getRedom(int minValue, int maxValue)
     {
-        return Random.Range(minValue, maxValue);
+        return UnityEngine.Random.Range(minValue, maxValue);
     }
 
     public float getRedom(float minValue, float maxValue)
     {
-        return Random.Range(minValue, maxValue);
+        return UnityEngine.Random.Range(minValue, maxValue);
     }
 }

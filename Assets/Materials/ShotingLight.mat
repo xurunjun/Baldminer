@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ShotingLight
+  m_Shader: {fileID: -6465566751694194690, guid: df95688403a65c94a81f13b4b294cfdf, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 3000
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_403bf83a07f343b1ae68cdb81c30e251:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_b945467ba37847cca2065dc7423ae16d:
+        m_Texture: {fileID: 2800000, guid: 9e35fc52dc9b02e4aa15e7805a680f22, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_0c872671c9b04839806850486b4460c5: 30
+    - Vector1_28bb793e65b4458990ee9064bf0da4e8: 1
+    - Vector1_2effbf1a4a384530a15dcd19f8336d41: 10
+    - Vector1_6ebaff5b17a8457ca82f0f26df4e9739: 10
+    m_Colors:
+    - Color_8713f089df09485a94f26496e74d1fd2: {r: 1, g: 1, b: 1, a: 1}
+    - Color_924dae9376d942b2873dcc52ecf3b437: {r: 2.9960785, g: 0, b: 0, a: 0.76862746}
+    - Vector2_333c060262cf4f7b9172a53da7127a3d: {r: 1.2, g: 1.16, b: 0, a: 0}
+    - Vector2_84841e1a6f93415a8734f5fea580bbe7: {r: 3, g: 3, b: 0, a: 0}
+    - Vector2_a2845c273daf43a1a52e6b592f4c8fad: {r: 0, g: 0, b: 0, a: 0}
+    - Vector2_dd4afe57e038444fa91f64f3cf6358ca: {r: 1, g: 1, b: 0, a: 0}
+    - Vector2_df324db523ca4271bed4c68e78b13d9f: {r: 5, g: 0, b: 0, a: 0}
+    - Vector4_8712e66b99c5438e90d5b82464445b2f: {r: 2, g: 4, b: 0.1, a: -0.375}
+  m_BuildTextureStacks: []

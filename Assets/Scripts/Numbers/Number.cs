@@ -29,68 +29,67 @@ public class Number : MonoBehaviour
     [Header("动画状态机")]
     public Animator animator;
     private Vector3 currentPos;
-    private void OnEnable() {
-        isBacking=false;
-        rigidbody.interpolation=RigidbodyInterpolation2D.Interpolate;
-        rigidbody.isKinematic=false;
-        rigidbody.velocity=Vector2.zero;
-        rigidbody.angularVelocity=0;
-        rigidbody.transform.rotation=Quaternion.identity;
+    private void OnEnable()
+    {
+        isBacking = false;
+        rigidbody.interpolation = RigidbodyInterpolation2D.Interpolate;
+        rigidbody.isKinematic = false;
+        rigidbody.velocity = Vector2.zero;
+        rigidbody.angularVelocity = 0;
+        rigidbody.transform.rotation = Quaternion.identity;
+        rigidbody.transform.localPosition = Vector3.zero;
     }
 
     public void setScore(int factor)
     {
-        this.score=factor;
-        transform.localScale=new Vector3(baseScale/factor,baseScale/factor,1);
+        this.score = factor;
+        transform.localScale = new Vector3(baseScale / factor, baseScale / factor, 1);
     }
 
-    private void Update() {
-        direction=(targetPos-(Vector2)transform.position).normalized;
-
-        if(isBacking)
-        {
-            currentPos=transform.position;
-            transform.right=Vector3.Slerp(transform.right,direction,lerp/Vector2.Distance(transform.position,targetPos)*speed);
-            transform.position = currentPos+transform.right*speed;
-            rigidbody.transform.Rotate(Vector3.forward*speed*roationSpeed);
-        }
-        if(Vector2.Distance(transform.position,targetPos)<2.5f)
-        {
-            isBacking=false;
-            animator.SetBool("isbacking",false);
-            recycleComplete();
-        }
-    }
-
-    public void recycleComplete()
+    private IEnumerator backToPlayer()
     {
-        rigidbody.velocity=Vector2.zero;
-        transform.position=targetPos;
-        StartCoroutine(waitToDestory(gameObject,.3f));
+        while (Vector2.Distance(transform.position, targetPos) > 2.5f)
+        {
+            direction = (targetPos - (Vector2)transform.position).normalized;
+            currentPos = transform.position;
+            transform.right = Vector3.Slerp(transform.right, direction, lerp / Vector2.Distance(transform.position, targetPos) * speed);
+            transform.position = currentPos + transform.right * speed;
+            rigidbody.transform.Rotate(Vector3.forward * speed * roationSpeed);
+
+            yield return null;
+        }
+        isBacking = false;
+        animator.SetBool("isbacking", false);
+        animator.SetBool("isDestory", true);
+        rigidbody.velocity = Vector2.zero;
+        transform.position = targetPos;
+        Player.Instance.isBack = false;
+        StartCoroutine("waitToAnimator");
     }
 
-    IEnumerator waitToDestory(GameObject gameObject,float time)
+    private IEnumerator waitToAnimator()
     {
-        yield return new WaitForSeconds(time);
-        Player.Instance.isBack=false;
+        while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime <= 1.0f)
+        {
+            yield return null;
+        }
+        animator.SetBool("isDestory", false);
         GameManager.Instance.changeScore(score);
         GenerateManager.Instance.itemNum--;
+        GenerateManager.Instance.addNumbers();
         ObjectPool.Instance.PushObject(gameObject);
-        if(gameObject.activeInHierarchy)
-        {
-            ObjectPool.Instance.PushObject(gameObject);
-        }
-        // Destroy(gameObject);
     }
 
-    public void OnCollisionAction(Collision2D other) {
-        if(other.gameObject.tag=="bullet")
+    public void OnCollisionAction(Collision2D other)
+    {
+        if (other.gameObject.tag == "bullet")
         {
             speed = Player.Instance.currentSpeed;
-            isBacking=true;
-            animator.SetBool("isbacking",true);
-            rigidbody.interpolation=RigidbodyInterpolation2D.None;
-            rigidbody.isKinematic=true;
+            isBacking = true;
+            animator.SetBool("isbacking", true);
+            rigidbody.interpolation = RigidbodyInterpolation2D.None;
+            rigidbody.isKinematic = true;
+            StartCoroutine("backToPlayer");
         }
     }
 }
