@@ -3609,7 +3609,7 @@ MonoBehaviour:
   _subScore: 0
   _mulScore: 0
   _divScore: 0
-  FeverCost: 10
+  FeverCost: 1
   FeverTime: 20
   scoreShower: {fileID: 445798690}
   bullet: {fileID: 957619879}

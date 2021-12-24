@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 
 [Serializable]
 public class TouchEvent : UnityEvent<Vector2> { }
 [Serializable]
-public class HoldEndTouch : UnityEvent<Vector2,float> { }
+public class HoldEndTouch : UnityEvent<Vector2, float> { }
 [DefaultExecutionOrder(-1)]
 public class InputManager : Singleton<InputManager>
 {
@@ -18,15 +19,18 @@ public class InputManager : Singleton<InputManager>
     public TouchEvent onEndTouch;
     private InputAction touchPosition;
 
+    private Touchscreen touchscreen;
+
     private void Awake()
     {
         touchPosition = gameObject.GetComponent<PlayerInput>().currentActionMap.FindAction("TouchPosition");
+        touchscreen = Touchscreen.current;
     }
 
     public void EndTouch(InputAction.CallbackContext context)
     {
 
-        if (context.performed)
+        if (context.phase == InputActionPhase.Canceled)
         {
             onEndTouch.Invoke(touchPosition.ReadValue<Vector2>());
             // Debug.Log("end");
@@ -35,20 +39,23 @@ public class InputManager : Singleton<InputManager>
 
     public void HoldTouch(InputAction.CallbackContext context)
     {
-        if(context.started)
+        switch (context.phase)
         {
-            onHoldStartTouch.Invoke();
-            // Debug.Log("start");
-        }
-        if(context.performed)
-        {
-            onHoldPerformTouch.Invoke();
-            // Debug.Log("perform");
-        }
-        if(context.canceled)
-        {
-            onHoldEndTouch.Invoke(touchPosition.ReadValue<Vector2>(), (float)context.duration);
-            // Debug.Log("cancel");
+            case InputActionPhase.Started:
+                onHoldStartTouch.Invoke();
+                break;
+            case InputActionPhase.Performed:
+                onHoldPerformTouch.Invoke();
+                break;
+            case InputActionPhase.Canceled:
+                onHoldEndTouch.Invoke(touchPosition.ReadValue<Vector2>(), (float)context.duration);
+                break;
+            // case InputActionPhase.Waiting:
+            //     onHoldEndTouch.Invoke(touchPosition.ReadValue<Vector2>(), (float)context.duration);
+            //     break;
+            // case InputActionPhase.Disabled:
+            //     onHoldEndTouch.Invoke(touchPosition.ReadValue<Vector2>(), (float)context.duration);
+            //     break;
         }
     }
 }
