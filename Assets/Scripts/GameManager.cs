@@ -26,8 +26,10 @@ public class GameManager : Singleton<GameManager>
     [Header("子弹显示器")]
     public BulletIcon bullet;
     private int next;
-    public int _NEXT{
-        get{
+    public int _NEXT
+    {
+        get
+        {
             return next;
         }
     }
@@ -37,6 +39,7 @@ public class GameManager : Singleton<GameManager>
     private void Awake()
     {
         Random.InitState(seed);
+        Application.targetFrameRate = 30;
         scoreEvent = new List<ScoreEvent>();
         Applicantion.targetFrameRate = 30;
         scoreEvent.Add(new ScoreEvent());
@@ -52,35 +55,39 @@ public class GameManager : Singleton<GameManager>
 
     private void addScroe(int score)
     {
-        this.score += (int)(score*Player.Instance._Mage);
-        _addScore+=score;
+        this.score += (int)(score + Player.Instance._Mage);
+        _addScore += score;
     }
 
     private void subScore(int score)
     {
-        this.score -= (int)(score*Player.Instance._Mage);
-        _subScore+=score;
+        this.score -= (int)(score - Player.Instance._Mage);
+        _subScore += score;
     }
 
     private void mulScore(int score)
     {
-        this.score*=(int)(score*Player.Instance._Mage);
-        _mulScore+=score;
+        this.score *= (int)(score * Player.Instance._Mage);
+        _mulScore += score;
     }
 
     private void divScore(int score)
     {
-        _divScore+=score;
-        if(score==0)
+        _divScore += score;
+        _addScore += score;
+        _subScore += score;
+        _mulScore += score;
+        score = (int)(score / Player.Instance._Mage);
+        if (score == 0)
         {
-            score=1;
+            score = 1;
         }
-        this.score/=(int)(score*Player.Instance._Mage);
+        this.score /= score;
     }
 
     public void nextScoreEvent()
     {
-        next = getRedom(0,scoreEvent.Count);
+        next = getRedom(0, scoreEvent.Count);
         setSymbol();
         bullet.UpdateBulletImage(next);
     }
@@ -96,44 +103,44 @@ public class GameManager : Singleton<GameManager>
 
     public void updatePlayer()
     {
-        if(_addScore>Player.Instance.getCost(Player.LevelType.SPEED))
+        if (_addScore > Player.Instance.getCost(Player.LevelType.SPEED))
         {
-            _addScore=0;
+            _addScore = 0;
             Player.Instance.LevelUp(Player.LevelType.SPEED);
         }
-        if(_subScore>Player.Instance.getCost(Player.LevelType.SIZE))
+        if (_subScore > Player.Instance.getCost(Player.LevelType.SIZE))
         {
-            _subScore=0;
+            _subScore = 0;
             Player.Instance.LevelUp(Player.LevelType.SIZE);
         }
-        if(_mulScore>Player.Instance.getCost(Player.LevelType.MAGN))
+        if (_mulScore > Player.Instance.getCost(Player.LevelType.MAGN))
         {
-            _mulScore=0;
+            _mulScore = 0;
             Player.Instance.LevelUp(Player.LevelType.MAGN);
         }
-        if(_divScore>Player.Instance.getCost(Player.LevelType.COST))
+        if (_divScore > Player.Instance.getCost(Player.LevelType.COST))
         {
-            _divScore=0;
+            _divScore = 0;
             Player.Instance.LevelUp(Player.LevelType.COST);
         }
     }
 
     public void setSymbol()
     {
-        switch(next)
+        switch (next)
         {
             case 0:
-            symbol="+";
-            break;
+                symbol = "+";
+                break;
             case 1:
-            symbol="-";
-            break;
+                symbol = "-";
+                break;
             case 2:
-            symbol="*";
-            break;
+                symbol = "*";
+                break;
             case 3:
-            symbol="/";
-            break;
+                symbol = "/";
+                break;
 
         }
     }

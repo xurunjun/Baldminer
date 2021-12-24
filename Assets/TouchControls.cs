@@ -32,15 +32,23 @@ public class @TouchControls : IInputActionCollection, IDisposable
                     ""id"": ""da552d19-dc55-42e6-b61f-0d9c3d1c439e"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """"
+                    ""interactions"": ""Press(behavior=1)""
                 },
                 {
                     ""name"": ""TouchPosition"",
                     ""type"": ""PassThrough"",
-                    ""id"": ""2986ad09-a776-48c4-99d0-081910ddd899"",
+                    ""id"": ""3ee107f9-2f8e-4e2d-85f0-0910fe8695e5"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""TouchHold"",
+                    ""type"": ""Button"",
+                    ""id"": ""0e102786-06b8-427d-aede-9447261f1afb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold""
                 }
             ],
             ""bindings"": [
@@ -70,7 +78,7 @@ public class @TouchControls : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""e276ff51-e848-42e1-9b74-8a1d94d5b68d"",
                     ""path"": ""<Touchscreen>/primaryTouch/press"",
-                    ""interactions"": ""Press(behavior=2)"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""TouchPress"",
@@ -81,7 +89,7 @@ public class @TouchControls : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""2a6598d7-bc1f-476c-8ab2-037e93314c4f"",
                     ""path"": ""<Mouse>/press"",
-                    ""interactions"": ""Press(behavior=2)"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""TouchPress"",
@@ -90,7 +98,7 @@ public class @TouchControls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""f26121c7-2a74-4e0a-a251-72546259d96b"",
+                    ""id"": ""43e155dc-990b-4e29-ab6b-05b21089a6ef"",
                     ""path"": ""<Touchscreen>/position"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -101,12 +109,34 @@ public class @TouchControls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""7ad12c0a-b451-4309-8ab2-6f7c337157ee"",
+                    ""id"": ""5d3625ee-df94-488a-8be7-1827b11d53d6"",
                     ""path"": ""<Mouse>/position"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""TouchPosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""616e6fc4-d5c6-4e29-8632-3550a3e2d79f"",
+                    ""path"": ""<Touchscreen>/press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TouchHold"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""93639396-2793-4614-b089-2bba716cee35"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TouchHold"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -626,6 +656,7 @@ public class @TouchControls : IInputActionCollection, IDisposable
         m_Touch_TouchInout = m_Touch.FindAction("TouchInout", throwIfNotFound: true);
         m_Touch_TouchPress = m_Touch.FindAction("TouchPress", throwIfNotFound: true);
         m_Touch_TouchPosition = m_Touch.FindAction("TouchPosition", throwIfNotFound: true);
+        m_Touch_TouchHold = m_Touch.FindAction("TouchHold", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -690,6 +721,7 @@ public class @TouchControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Touch_TouchInout;
     private readonly InputAction m_Touch_TouchPress;
     private readonly InputAction m_Touch_TouchPosition;
+    private readonly InputAction m_Touch_TouchHold;
     public struct TouchActions
     {
         private @TouchControls m_Wrapper;
@@ -697,6 +729,7 @@ public class @TouchControls : IInputActionCollection, IDisposable
         public InputAction @TouchInout => m_Wrapper.m_Touch_TouchInout;
         public InputAction @TouchPress => m_Wrapper.m_Touch_TouchPress;
         public InputAction @TouchPosition => m_Wrapper.m_Touch_TouchPosition;
+        public InputAction @TouchHold => m_Wrapper.m_Touch_TouchHold;
         public InputActionMap Get() { return m_Wrapper.m_Touch; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -715,6 +748,9 @@ public class @TouchControls : IInputActionCollection, IDisposable
                 @TouchPosition.started -= m_Wrapper.m_TouchActionsCallbackInterface.OnTouchPosition;
                 @TouchPosition.performed -= m_Wrapper.m_TouchActionsCallbackInterface.OnTouchPosition;
                 @TouchPosition.canceled -= m_Wrapper.m_TouchActionsCallbackInterface.OnTouchPosition;
+                @TouchHold.started -= m_Wrapper.m_TouchActionsCallbackInterface.OnTouchHold;
+                @TouchHold.performed -= m_Wrapper.m_TouchActionsCallbackInterface.OnTouchHold;
+                @TouchHold.canceled -= m_Wrapper.m_TouchActionsCallbackInterface.OnTouchHold;
             }
             m_Wrapper.m_TouchActionsCallbackInterface = instance;
             if (instance != null)
@@ -728,6 +764,9 @@ public class @TouchControls : IInputActionCollection, IDisposable
                 @TouchPosition.started += instance.OnTouchPosition;
                 @TouchPosition.performed += instance.OnTouchPosition;
                 @TouchPosition.canceled += instance.OnTouchPosition;
+                @TouchHold.started += instance.OnTouchHold;
+                @TouchHold.performed += instance.OnTouchHold;
+                @TouchHold.canceled += instance.OnTouchHold;
             }
         }
     }
@@ -842,6 +881,7 @@ public class @TouchControls : IInputActionCollection, IDisposable
         void OnTouchInout(InputAction.CallbackContext context);
         void OnTouchPress(InputAction.CallbackContext context);
         void OnTouchPosition(InputAction.CallbackContext context);
+        void OnTouchHold(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

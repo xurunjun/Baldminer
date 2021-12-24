@@ -1,18 +1,25 @@
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class AddBullet : Bullet
 {
-    public override void fly()
+    public override IEnumerator fly()
     {
-        transform.position =  currentPos+direction*speed;
-        rigidbody.transform.Rotate(Vector3.forward*speed*rotateSpeedFactor);
-    }
-    
-    public void OnCollisionAction(Collision2D other) {
-        if(other.gameObject.tag=="Number")
+        while (true)
         {
-            GameObject e =  Instantiate(explose);
+            currentPos = transform.position;
+            transform.position = currentPos + direction * speed;
+            rigidbody.transform.Rotate(Vector3.forward * speed * rotateSpeedFactor);
+            yield return null;
+        }
+    }
+
+    public void OnCollisionAction(Collision2D other)
+    {
+        if (other.gameObject.tag == "Number")
+        {
+            StopAllCoroutines();
+            GameObject e = Instantiate(explose);
             e.transform.position = transform.position;
             ObjectPool.Instance.PushObject(gameObject);
             // Destroy(gameObject);
