@@ -2439,11 +2439,11 @@ MonoBehaviour:
   - 2
   MagnLevel:
   - 1
+  - 1.5
   - 2
+  - 2.5
   - 3
-  - 4
-  - 5
-  - 6
+  - 3.5
   costLevel:
   - 1
   - 0.5
@@ -3603,6 +3603,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   seed: 0
   score: 0
+  maxScore: 20000000
   symbol: 
   _addScore: 0
   _subScore: 0

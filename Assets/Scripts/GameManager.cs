@@ -14,6 +14,8 @@ public class GameManager : Singleton<GameManager>
     public int seed;
     [Header("分数")]
     public int score;
+    [Header("最大分数")]
+    public int maxScore;
     [Header("符号")]
     public string symbol;
     [Header("加法分数")]
@@ -29,6 +31,19 @@ public class GameManager : Singleton<GameManager>
     [Header("Fever时间")]
     public int FeverTime;
     private int feverNum;
+
+    public int _Score
+    {
+        get
+        {
+            return score;
+        }
+        set
+        {
+            if (value <= maxScore)
+                score = value;
+        }
+    }
 
     public int _FeverNum
     {
@@ -105,7 +120,7 @@ public class GameManager : Singleton<GameManager>
 
     public void RandomSeed()
     {
-        seed = (int)(DateTime.Now.Ticks%1000);
+        seed = (int)(DateTime.Now.Ticks % 1000);
         UnityEngine.Random.InitState(seed);
     }
 
@@ -117,19 +132,19 @@ public class GameManager : Singleton<GameManager>
 
     public void addScroe(int score)
     {
-        this.score += (int)(score + Player.Instance._Mage);
+        _Score += (int)(score + Player.Instance._Mage);
         _addScore += score;
     }
 
     public void subScore(int score)
     {
-        this.score -= (int)(score - Player.Instance._Mage);
+        _Score -= (int)(score - Player.Instance._Mage);
         _subScore += score;
     }
 
     public void mulScore(int score)
     {
-        this.score *= (int)(score * Player.Instance._Mage);
+        _Score *= (int)(score * Player.Instance._Mage);
         _mulScore += score;
     }
 
@@ -144,7 +159,7 @@ public class GameManager : Singleton<GameManager>
         {
             score = 1;
         }
-        this.score /= score;
+        _Score /= score;
     }
 
     public void nextScoreEvent()
@@ -166,7 +181,7 @@ public class GameManager : Singleton<GameManager>
 
     public void addScoreInFever(int score)
     {
-        this.score += score;
+        _Score += score;
         _addScore += 1;
         _subScore += 1;
         _mulScore += 1;

@@ -200,7 +200,7 @@ public class Player : Singleton<Player>
 
     public void reStart()
     {
-        currentSpeed = 1.4f;
+        currentSpeed = 2;
         currentSize = 1;
         currentMagn = 1;
         currentCost = 1;
@@ -222,5 +222,6 @@ public class Player : Singleton<Player>
         isFire = false;
         isBack = false;
         isLaser = false;
+        reStart();
     }
 }

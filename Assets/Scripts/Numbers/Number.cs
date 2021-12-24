@@ -58,12 +58,10 @@ public class Number : MonoBehaviour
 
             yield return null;
         }
-        isBacking = false;
         animator.SetBool("isbacking", false);
         animator.SetBool("isDestory", true);
         rigidbody.velocity = Vector2.zero;
         transform.position = targetPos;
-        Player.Instance.isBack = false;
         StartCoroutine("waitToAnimator");
     }
 
@@ -73,11 +71,13 @@ public class Number : MonoBehaviour
         {
             yield return null;
         }
+        ObjectPool.Instance.PushObject(gameObject);
+        isBacking = false;
         animator.SetBool("isDestory", false);
+        Player.Instance.isBack = false;
         GameManager.Instance.changeScore(score);
         GenerateManager.Instance.itemNum--;
         GenerateManager.Instance.addNumbers();
-        ObjectPool.Instance.PushObject(gameObject);
     }
 
     public void OnCollisionAction(Collision2D other)
