@@ -17,6 +17,8 @@ public class Score : MonoBehaviour
 
     public void setScore(int score)
     {
+        if (score > 999999999)
+            score = 999999999;
         Scorenum.text=score.ToString();
         this.score=score;
     }

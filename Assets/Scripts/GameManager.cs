@@ -74,6 +74,10 @@ public class GameManager : Singleton<GameManager>
             {
                 endFever();
             }
+            else
+            {
+                feverNum = 0;
+            }
             feverEvent.Invoke(value);
         }
     }

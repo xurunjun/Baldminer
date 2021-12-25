@@ -15,6 +15,7 @@ public class EndGame : MonoBehaviour
     public Score score;
     public Text EndScore;
     public GameManager gameManager;
+    public ScoreSlider scoreSlider;
 
     public void Start()
     {
@@ -26,6 +27,7 @@ public class EndGame : MonoBehaviour
         EndGameCanvas.SetActive(false);
         StartGameCanvas.SetActive(true);
         EndGameCanvas.SetActive(false);
+        player.gameObject.SetActive(false);
         //stopBtn.Player.SetActive(false);
         stopBtn.Generater.SetActive(false);
     }
@@ -47,11 +49,16 @@ public class EndGame : MonoBehaviour
         if (soundSetting.bgmtoggle.isOn)
             soundSetting.audioSource.gameObject.SetActive(true);
 
+        scoreSlider.Start();
+        //scoreSlider.GoldSlider.value = 0;
         gameManager.RestartGame();
     }
 
     public void Update()
     {
-        EndScore.text = score.score.ToString();
+        if(score.score <= 99999999)
+            EndScore.text = score.score.ToString();
+        else
+            EndScore.text = (99999999).ToString();
     }
 }

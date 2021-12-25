@@ -23,7 +23,7 @@ public class ScoreSlider : MonoBehaviour
     public SoundSetting soundSetting;
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         AddSlider.value = 0;
         SubSlider.value = 0;
@@ -67,7 +67,7 @@ public class ScoreSlider : MonoBehaviour
         GoldSlider.value = gameManager._FeverNum;
 
         if (gameManager.isFever)
-            GoldSlider.value = 10;
+            GoldSlider.value = 20;
 
 
 
