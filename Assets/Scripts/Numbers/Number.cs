@@ -48,7 +48,11 @@ public class Number : MonoBehaviour
 
     private IEnumerator backToPlayer()
     {
+<<<<<<< HEAD
         while (Vector2.Distance(transform.position, targetPos) > 2.5f)
+=======
+        while (Vector2.Distance(transform.position, targetPos) > speed+0.3f)
+>>>>>>> remotes/origin/Pushfct
         {
             direction = (targetPos - (Vector2)transform.position).normalized;
             currentPos = transform.position;
@@ -58,10 +62,18 @@ public class Number : MonoBehaviour
 
             yield return null;
         }
+<<<<<<< HEAD
+=======
+        isBacking = false;
+>>>>>>> remotes/origin/Pushfct
         animator.SetBool("isbacking", false);
         animator.SetBool("isDestory", true);
         rigidbody.velocity = Vector2.zero;
         transform.position = targetPos;
+<<<<<<< HEAD
+=======
+        Player.Instance.isBack = false;
+>>>>>>> remotes/origin/Pushfct
         StartCoroutine("waitToAnimator");
     }
 
@@ -71,6 +83,7 @@ public class Number : MonoBehaviour
         {
             yield return null;
         }
+<<<<<<< HEAD
         ObjectPool.Instance.PushObject(gameObject);
         isBacking = false;
         animator.SetBool("isDestory", false);
@@ -78,6 +91,13 @@ public class Number : MonoBehaviour
         GameManager.Instance.changeScore(score);
         GenerateManager.Instance.itemNum--;
         GenerateManager.Instance.addNumbers();
+=======
+        animator.SetBool("isDestory", false);
+        GameManager.Instance.changeScore(score);
+        GenerateManager.Instance.itemNum--;
+        GenerateManager.Instance.addNumbers();
+        ObjectPool.Instance.PushObject(gameObject);
+>>>>>>> remotes/origin/Pushfct
     }
 
     public void OnCollisionAction(Collision2D other)

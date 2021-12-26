@@ -200,7 +200,11 @@ public class Player : Singleton<Player>
 
     public void reStart()
     {
+<<<<<<< HEAD
         currentSpeed = 2;
+=======
+        currentSpeed = 6f;
+>>>>>>> remotes/origin/Pushfct
         currentSize = 1;
         currentMagn = 1;
         currentCost = 1;
@@ -222,6 +226,9 @@ public class Player : Singleton<Player>
         isFire = false;
         isBack = false;
         isLaser = false;
+<<<<<<< HEAD
         reStart();
+=======
+>>>>>>> remotes/origin/Pushfct
     }
 }

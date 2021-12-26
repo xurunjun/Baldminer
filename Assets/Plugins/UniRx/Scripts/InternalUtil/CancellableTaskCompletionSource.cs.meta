@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Scripts/Bullets/Laser.cs.meta
+guid: 0b201edf21ec9064baa5e4b9aa7ef9cd
+=======
+guid: 622c7ba8630c25b4c911cd1612ee0887
+>>>>>>> remotes/origin/Pushfct:Assets/Plugins/UniRx/Scripts/InternalUtil/CancellableTaskCompletionSource.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

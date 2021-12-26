@@ -23,12 +23,13 @@ public class ScoreSlider : MonoBehaviour
     public SoundSetting soundSetting;
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         AddSlider.value = 0;
         SubSlider.value = 0;
         MutiplySlider.value = 0;
         DivitionSlider.value = 0;
+        GoldSlider.value = 0;
     }
 
     // Update is called once per frame
@@ -63,8 +64,13 @@ public class ScoreSlider : MonoBehaviour
         SubSlider.value = gameManager._subScore;
         MutiplySlider.value = gameManager._mulScore;
         DivitionSlider.value = gameManager._divScore;
+        GoldSlider.value = gameManager._FeverNum;
 
-        
+        if (gameManager.isFever)
+            GoldSlider.value = 20;
+
+
+
     }
 
 }

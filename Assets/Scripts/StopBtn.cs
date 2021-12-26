@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class StopBtn : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class StopBtn : MonoBehaviour
     public GameObject Generater;
 
     public SoundSetting soundSetting;
+    public PlayerInput inputManager;
 
     public AudioSource audioSource;
 
@@ -28,6 +30,7 @@ public class StopBtn : MonoBehaviour
         Player.SetActive(false);
         Generater.SetActive(false);
         StopEnable = false;
+        inputManager.enabled = false;
     }
 
     public void ContinueBtnOnClick()
@@ -39,5 +42,6 @@ public class StopBtn : MonoBehaviour
         Generater.SetActive(true);
         StopWindow.SetActive(false);
         StopEnable = true;
+        inputManager.enabled = true;
     }
 }
