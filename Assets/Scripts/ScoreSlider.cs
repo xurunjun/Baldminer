@@ -73,6 +73,7 @@ public class ScoreSlider : MonoBehaviour
 
         if (gameManager.isFever)
             GoldSlider.value = 20;
+        GoldSlider.value = gameManager._FeverNum;
 
 
 

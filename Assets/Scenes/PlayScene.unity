@@ -2433,6 +2433,14 @@ MonoBehaviour:
   - 12
   - 14
   - 16
+=======
+  - 6
+  - 8
+  - 10
+  - 12
+  - 14
+  - 16
+>>>>>>> remotes/origin/Pushfct
   sizeLevel:
   - 1
   - 1.2
@@ -2442,11 +2450,19 @@ MonoBehaviour:
   - 2
   MagnLevel:
   - 1
+<<<<<<< HEAD
   - 1.5
   - 2
   - 3
   - 4
   - 5
+=======
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+>>>>>>> remotes/origin/Pushfct
   costLevel:
   - 1
   - 0.5
@@ -2455,6 +2471,9 @@ MonoBehaviour:
   - 0.0625
   - 0.03125
   currentSpeed: 6
+=======
+  currentSpeed: 6
+>>>>>>> remotes/origin/Pushfct
   currentSize: 1
   currentMagn: 1
   currentCost: 1
@@ -3614,6 +3633,9 @@ MonoBehaviour:
   _mulScore: 0
   _divScore: 0
   FeverCost: 20
+=======
+  FeverCost: 20
+>>>>>>> remotes/origin/Pushfct
   FeverTime: 20
   scoreShower: {fileID: 445798690}
   bullet: {fileID: 957619879}

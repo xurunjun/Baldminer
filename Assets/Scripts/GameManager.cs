@@ -32,6 +32,8 @@ public class GameManager : Singleton<GameManager>
     public int FeverTime;
     private int feverNum;
 
+=======
+>>>>>>> remotes/origin/Pushfct
     public int _FeverNum
     {
         get
@@ -62,6 +64,9 @@ public class GameManager : Singleton<GameManager>
         }
     }
     public bool isFever = false;
+=======
+    public bool isFever = false;
+>>>>>>> remotes/origin/Pushfct
 
     public int _Score
     {
@@ -111,6 +116,12 @@ public class GameManager : Singleton<GameManager>
         UnityEngine.Random.InitState(seed);
         Application.targetFrameRate = 30;
         scoreEvent = new List<ScoreEvent>();
+<<<<<<< HEAD
+=======
+
+        Application.targetFrameRate = 30;
+
+>>>>>>> remotes/origin/Pushfct
         scoreEvent.Add(new ScoreEvent());
         scoreEvent.Add(new ScoreEvent());
         scoreEvent.Add(new ScoreEvent());
@@ -124,11 +135,16 @@ public class GameManager : Singleton<GameManager>
 
     public void RandomSeed()
     {
+<<<<<<< HEAD
         seed = (int)(DateTime.Now.Ticks % 1000);
+=======
+        seed = (int)(DateTime.Now.Ticks%1000);
+>>>>>>> remotes/origin/Pushfct
         UnityEngine.Random.InitState(seed);
     }
 
     public void RestartGame()
+<<<<<<< HEAD
     {
         _Fever = false;
         restartEvent.Invoke();
@@ -154,6 +170,33 @@ public class GameManager : Singleton<GameManager>
 
     public void divScore(int score)
     {
+=======
+    {
+        _Fever = false;
+        restartEvent.Invoke();
+    }
+
+    public void addScroe(int score)
+    {
+        this.score += (int)(score + Player.Instance._Mage);
+        _addScore += score;
+    }
+
+    public void subScore(int score)
+    {
+        this.score -= (int)(score - Player.Instance._Mage);
+        _subScore += score;
+    }
+
+    public void mulScore(int score)
+    {
+        this.score *= (int)(score * Player.Instance._Mage);
+        _mulScore += score;
+    }
+
+    public void divScore(int score)
+    {
+>>>>>>> remotes/origin/Pushfct
         _divScore += score;
         _addScore += score;
         _subScore += score;
@@ -163,7 +206,11 @@ public class GameManager : Singleton<GameManager>
         {
             score = 1;
         }
+<<<<<<< HEAD
         _Score /= score;
+=======
+        this.score /= score;
+>>>>>>> remotes/origin/Pushfct
     }
 
     public void nextScoreEvent()
@@ -185,7 +232,11 @@ public class GameManager : Singleton<GameManager>
 
     public void addScoreInFever(int score)
     {
+<<<<<<< HEAD
         _Score += score;
+=======
+        this.score += score;
+>>>>>>> remotes/origin/Pushfct
         _addScore += 1;
         _subScore += 1;
         _mulScore += 1;
