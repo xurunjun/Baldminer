@@ -63,6 +63,19 @@ public class GameManager : Singleton<GameManager>
     }
     public bool isFever = false;
 
+    public int _Score
+    {
+        get
+        {
+            return score;
+        }
+        set
+        {
+            if (value <= maxScore)
+                score = value;
+        }
+    }
+
     public bool _Fever
     {
         get
@@ -75,6 +88,10 @@ public class GameManager : Singleton<GameManager>
             if (value)
             {
                 endFever();
+            }
+            else
+            {
+                feverNum = 0;
             }
             feverEvent.Invoke(value);
         }

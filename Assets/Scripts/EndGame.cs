@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class EndGame : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class EndGame : MonoBehaviour
     public Text EndScore;
     public GameManager gameManager;
     public ScoreSlider scoreSlider;
+    public PlayerInput inputManager;
 
     public void Start()
     {
@@ -52,6 +54,8 @@ public class EndGame : MonoBehaviour
         scoreSlider.Start();
         //scoreSlider.GoldSlider.value = 0;
         gameManager.RestartGame();
+        player.gameObject.SetActive(true);
+        inputManager.enabled = true;
     }
 
     public void Update()

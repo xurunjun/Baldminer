@@ -59,12 +59,17 @@ public class ScoreSlider : MonoBehaviour
         SubImage.color = ImageColor[player._subLevel];
         MutiplyImgae.color = ImageColor[player._mulLevel];
         DivitionImage.color = ImageColor[player._divLevel];
-
-        AddSlider.value = gameManager._addScore;
-        SubSlider.value = gameManager._subScore;
-        MutiplySlider.value = gameManager._mulScore;
-        DivitionSlider.value = gameManager._divScore;
-        GoldSlider.value = gameManager._FeverNum;
+        
+        if(gameManager._addScore <= AddSlider.maxValue)
+            AddSlider.value = gameManager._addScore;
+        if (gameManager._subScore <= SubSlider.maxValue)
+            SubSlider.value = gameManager._subScore;
+        if (gameManager._mulScore <= MutiplySlider.maxValue)
+            MutiplySlider.value = gameManager._mulScore;
+        if (gameManager._divScore <= DivitionSlider.maxValue)
+            DivitionSlider.value = gameManager._divScore;
+        if (gameManager._FeverNum <= GoldSlider.maxValue)
+            GoldSlider.value = gameManager._FeverNum;
 
         if (gameManager.isFever)
             GoldSlider.value = 20;

@@ -48,7 +48,7 @@ public class Number : MonoBehaviour
 
     private IEnumerator backToPlayer()
     {
-        while (Vector2.Distance(transform.position, targetPos) > 2.5f)
+        while (Vector2.Distance(transform.position, targetPos) > speed+ .5f)
         {
             direction = (targetPos - (Vector2)transform.position).normalized;
             currentPos = transform.position;
