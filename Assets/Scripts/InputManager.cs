@@ -57,5 +57,15 @@ public class InputManager : Singleton<InputManager>
             //     onHoldEndTouch.Invoke(touchPosition.ReadValue<Vector2>(), (float)context.duration);
             //     break;
         }
+        if(context.performed)
+        {
+            onHoldPerformTouch.Invoke();
+            // Debug.Log("perform");
+        }
+        if(context.canceled)
+        {
+            onHoldEndTouch.Invoke(touchPosition.ReadValue<Vector2>(), (float)context.duration);
+            // Debug.Log("cancel");
+        }
     }
 }

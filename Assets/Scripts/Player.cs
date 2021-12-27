@@ -200,7 +200,7 @@ public class Player : Singleton<Player>
 
     public void reStart()
     {
-        currentSpeed = 2;
+        currentSpeed = 6f;
         currentSize = 1;
         currentMagn = 1;
         currentCost = 1;

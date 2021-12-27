@@ -32,19 +32,6 @@ public class GameManager : Singleton<GameManager>
     public int FeverTime;
     private int feverNum;
 
-    public int _Score
-    {
-        get
-        {
-            return score;
-        }
-        set
-        {
-            if (value <= maxScore)
-                score = value;
-        }
-    }
-
     public int _FeverNum
     {
         get
@@ -74,7 +61,7 @@ public class GameManager : Singleton<GameManager>
             return next;
         }
     }
-    private bool isFever = false;
+    public bool isFever = false;
 
     public bool _Fever
     {
